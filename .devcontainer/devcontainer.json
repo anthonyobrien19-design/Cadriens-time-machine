@@ -1,0 +1,6 @@
+{
+  "name": "Time Machine (Android build)",
+  "image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
+  "postCreateCommand": "bash scripts/setup-codespace.sh",
+  "hostRequirements": { "cpus": 4, "memory": "8gb" }
+}
