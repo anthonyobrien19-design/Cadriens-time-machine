@@ -1012,7 +1012,8 @@ let voices=[];
 function loadVoices(){ try{ const local=speechSynthesis.getVoices().filter(v=>v.localService); voices=local.filter(v=>/^en/i.test(v.lang)).concat(local.filter(v=>!/^en/i.test(v.lang))); }catch(e){ voices=[]; } fillVoiceSelect(); }
 function langName(l){ try{ return new Intl.DisplayNames(['en'],{type:'language'}).of(l.replace('_','-')); }catch(e){ return l; } }
 if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
-function robotAvailable(){ return "speechSynthesis" in window; }
+// a narrator is available if the app's phone voices, the built-in retro engine (needs Web Audio) or the browser's voices exist
+function robotAvailable(){ return IS_APP || !!(window.AudioContext||window.webkitAudioContext) || ("speechSynthesis" in window); }
 function pickVoice(){ const uri=(vOverride&&vOverride.voiceURI)||state.config.voiceURI; return voices.find(v=>v.voiceURI===uri) || voices[0] || null; }
 function fillVoiceSelect(){
   const s=$("#sVoice"); if(!s) return;
