@@ -1629,6 +1629,8 @@ async function restoreFile(src){
       }
     }
     delete cfg.greetingMime;
+    // voice choices belong to each device (the tablet's voices differ from the computer's), so keep this device's
+    for(const k of ["engine","nativeVoice","voiceURI"]) if(state.config[k]!==undefined) cfg[k]=state.config[k];
     await store.clearMemories(); for(const m of mems) await store.putMemory(m); await store.setKV("config",cfg);
     state.config=cfg; state.memories=mems; state.arrivedYear=null; unlocked=false; closeSettings(); renderAll(); applyLock(); musicSync();
     await store.setKV("dirty",false); state.dirty=false; updateBackupInfo();
