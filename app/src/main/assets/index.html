@@ -268,9 +268,154 @@ header h1{flex:1;margin:0;font-size:clamp(18px,3.2vw,30px);letter-spacing:1px;co
 .is-app .web-only{display:none!important}
 label.chk{display:flex!important;gap:10px;align-items:center;color:var(--text)!important;font-size:15px!important}
 label.chk input{width:22px;height:22px}
+#engineBadge{position:relative;z-index:3;margin:4px auto 0;width:max-content;max-width:92%;padding:5px 12px;border-radius:999px;background:rgba(255,184,77,.15);border:1px solid rgba(255,184,77,.5);color:#ffd28a;font-size:13px;font-weight:800;font-family:system-ui,sans-serif}
+.arr-jumps{display:flex;gap:8px}
+@media (max-width:560px){ .controls .engage{flex:1 1 100%} .controls .ghost{flex:1 1 0} .tick.y2100{display:none} }
+#engineBadge.ok{background:rgba(63,246,255,.12);border-color:rgba(63,246,255,.5);color:#bdf9ff}
+/* ===== era scenes (filler for empty years) ===== */
+.era-hero{position:relative;margin:10px auto 0;width:min(1000px,94%);border-radius:12px;overflow:hidden;aspect-ratio:800/260;max-height:30vh;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.era-hero .scene{display:block;width:100%;height:100%}
+.era-hero .era-name{position:absolute;left:12px;bottom:10px;background:rgba(0,0,0,.6);padding:5px 12px;border-radius:8px;font-weight:900;font-size:clamp(13px,2vw,17px)}
+.era-hero .fut{position:absolute;right:10px;top:10px;background:rgba(120,60,200,.75);padding:4px 10px;border-radius:999px;font-size:12px;font-weight:900}
+.space.facts{padding-top:22px}
+.tile.fact .tthumb{display:flex;align-items:center;justify-content:center;font-size:58px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(0,0,0,.25))}
+.tile.fact .tinfo p{margin:2px 0 0;font-family:system-ui,sans-serif;font-size:13px;line-height:1.3;font-weight:600;opacity:.92}
+.tile.fact.now{outline:3px solid #fff;outline-offset:3px}
+.tile.fact.speaking{outline:3px solid var(--neon);outline-offset:3px}
+.scene .tw{animation:stw 2.6s ease-in-out infinite}
+@keyframes stw{50%{opacity:.12}}
+.scene .anim-fly{animation:sflyx 12s linear infinite}
+@keyframes sflyx{from{transform:translateX(-520px)}to{transform:translateX(520px)}}
+.scene .anim-bob{animation:sbob 2.6s ease-in-out infinite}
+@keyframes sbob{50%{transform:translateY(-6px)}}
+.scene .anim-float{animation:sbob 7s ease-in-out infinite}
+.scene .anim-lift{animation:slift 6s ease-in-out infinite alternate}
+@keyframes slift{from{transform:translateY(60px)}to{transform:translateY(-80px)}}
+.scene .anim-drive{animation:sdrive 12s ease-in-out infinite alternate}
+@keyframes sdrive{to{transform:translateX(220px)}}
+.scene .anim-pulse{animation:spulse 2s ease-in-out infinite}
+@keyframes spulse{50%{opacity:.2}}
+.scene .anim-spin{transform-box:fill-box;transform-origin:center;animation:sspin 60s linear infinite}
+@keyframes sspin{to{transform:rotate(360deg)}}
+.scene .anim-comet{animation:scomet 9s ease-in-out infinite alternate}
+@keyframes scomet{to{transform:translate(-70px,14px)}}
+@media (prefers-reduced-motion:reduce){ .scene *{animation:none!important} }
+.tile.fact .tthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.fact-cam{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.72);color:#fff;border-radius:8px;padding:4px 8px;font-size:13px;font-family:system-ui,sans-serif;font-weight:800;cursor:pointer}
+.fact-cam.del{left:auto;right:6px}
+.tile.fact .tbadge[data-zoom]{cursor:pointer;font-size:15px;padding:3px 8px}
+.era-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:4px 10px 0}
+.era-btns .btn{padding:9px 14px;font-size:14px}
+@media (max-width:560px){ .tile.fact .tthumb{font-size:42px} .tile.fact .tinfo p{font-size:12px} .era-hero{max-height:24vh} }
+@media (max-height:500px) and (orientation:landscape){ .era-hero{max-height:34vh} }
+
+/* ===== themes: shared ===== */
+body:not([data-theme="brick"]) #sky .sun, body:not([data-theme="brick"]) #sky .grid{display:none}
+body:not([data-theme="brick"]) #stars{height:100%}
+body:not([data-theme="brick"]) .studs::before{display:none}
+body:not([data-theme="brick"]) .logo{animation:none}
+
+/* ===== Vintage Time Machine: walnut, brass and ivory dials ===== */
+body[data-theme="vintage"]{--red:#8e2a1e;--yellow:#d8b25a;--blue:#2f5a6e;--green:#4a6a32;--orange:#b0642a;--neon:#f2dfb0;--pink:#8e2a1e;--bg:#1a0f08;--text:#f6ead0;--muted:#cbb78e;--font:Georgia,"Times New Roman",serif}
+[data-theme="vintage"] #sky{background:radial-gradient(ellipse at 30% 30%,#3a2414 0%,#1a0f08 70%)}
+[data-theme="vintage"] .brick{border-radius:10px;border:2px solid #c9a352;box-shadow:inset 0 1px 0 rgba(255,240,200,.35),inset 0 -3px 0 rgba(0,0,0,.3),0 3px 0 rgba(0,0,0,.45);background-image:linear-gradient(180deg,rgba(255,255,255,.14),rgba(0,0,0,.14))}
+[data-theme="vintage"] .b-gray{background-color:#4a3524}
+[data-theme="vintage"] .b-yellow{color:#2a1a08}
+[data-theme="vintage"] header h1{font-style:normal;font-variant:small-caps;letter-spacing:3px;color:#f2dfb0;text-shadow:0 2px 0 #5a3a18,0 0 18px rgba(216,178,90,.35)}
+[data-theme="vintage"] #console{background:repeating-linear-gradient(97deg,#5a3418 0 7px,#663d1d 7px 10px,#4e2d14 10px 16px);border:5px double #c9a352}
+[data-theme="vintage"] .display{background:radial-gradient(#f6ecd2,#e2cfa2);border:6px solid #b8913f;border-radius:16px;box-shadow:inset 0 0 18px rgba(90,50,10,.55)}
+[data-theme="vintage"] .dlabel{color:#5a3a18;letter-spacing:6px;font-variant:small-caps}
+[data-theme="vintage"] .seg .on{fill:#2a1608} [data-theme="vintage"] .seg .off{fill:#b9a274;opacity:.35} [data-theme="vintage"] .seg svg{filter:none}
+[data-theme="vintage"] .agebadge{color:#6a2a14}
+[data-theme="vintage"] .slider{background:linear-gradient(90deg,#4a2a12,#8a5a2a 70%,#c9a352)}
+[data-theme="vintage"] .slider::-webkit-slider-thumb{background:radial-gradient(#f6e2a8,#b8913f);border:3px solid #5a3a18;border-radius:50%;width:38px;height:38px}
+[data-theme="vintage"] .tick{color:#f2dfb0} [data-theme="vintage"] .tick i{background:#3a2414} [data-theme="vintage"] .tick.has i{background:#d8b25a}
+[data-theme="vintage"] .sheet,[data-theme="vintage"] #today,[data-theme="vintage"] #viewer{background:#24160c}
+[data-theme="vintage"] .sheet{border-color:#c9a352}
+[data-theme="vintage"] .sheet input,[data-theme="vintage"] .sheet textarea,[data-theme="vintage"] .sheet select{background:#170d06;border-color:#6a4a24}
+[data-theme="vintage"] .td-item,[data-theme="vintage"] .card .inner{background:#2e1d10}
+[data-theme="vintage"] .sp-year,[data-theme="vintage"] .td-date{text-shadow:0 2px 0 #5a3a18;color:#f2dfb0}
+[data-theme="vintage"] .tnone,[data-theme="vintage"] .tthumb{background:linear-gradient(135deg,#3a2414,#1a0f08)}
+[data-theme="vintage"] .era-hero .scene{filter:sepia(.55) saturate(.9)}
+[data-theme="vintage"] .era-hero{border:4px solid #c9a352}
+
+/* ===== Steampunk: riveted copper and brass, amber gauges ===== */
+body[data-theme="steampunk"]{--red:#9a3a1e;--yellow:#c89a3a;--blue:#2e6a66;--green:#4e6a3a;--orange:#b8642a;--neon:#ffae4a;--pink:#7a3a1a;--bg:#120c08;--text:#f4e2c4;--muted:#c8a878;--font:Georgia,"Book Antiqua",serif}
+[data-theme="steampunk"] #sky{background:radial-gradient(ellipse at 50% 20%,#2a1a10 0%,#120c08 75%)}
+[data-theme="steampunk"] .brick{border-radius:6px;border:2px solid #6a4020;background-image:linear-gradient(180deg,rgba(255,220,160,.28),rgba(0,0,0,.25) 60%,rgba(255,200,140,.12));box-shadow:inset 0 0 0 1px rgba(255,210,150,.25),0 4px 0 #2a1608,0 6px 10px rgba(0,0,0,.5)}
+body[data-theme="steampunk"] .studs::before{display:block;content:"";position:absolute;inset:5px;height:auto;top:5px;filter:none;pointer-events:none;
+  background:radial-gradient(circle,#f0c88a 0 2px,#4a2a10 2.6px,transparent 3.4px) left top/8px 8px no-repeat,radial-gradient(circle,#f0c88a 0 2px,#4a2a10 2.6px,transparent 3.4px) right top/8px 8px no-repeat,
+  radial-gradient(circle,#f0c88a 0 2px,#4a2a10 2.6px,transparent 3.4px) left bottom/8px 8px no-repeat,radial-gradient(circle,#f0c88a 0 2px,#4a2a10 2.6px,transparent 3.4px) right bottom/8px 8px no-repeat}
+[data-theme="steampunk"] .b-gray{background-color:#3a2e26}
+[data-theme="steampunk"] .b-yellow{color:#2a1606}
+[data-theme="steampunk"] header h1{font-style:normal;letter-spacing:4px;color:#e8c07a;text-shadow:0 2px 0 #4a2a10,0 0 14px rgba(255,150,60,.4)}
+[data-theme="steampunk"] #console{background:linear-gradient(180deg,#3a2e26,#241a14);border:4px solid #8a5a2b}
+[data-theme="steampunk"] .display{background:radial-gradient(#1a0e06,#080402);border:6px solid #a8743a;border-radius:18px;box-shadow:inset 0 0 26px #000,0 0 0 3px #4a2a10}
+[data-theme="steampunk"] .dlabel{color:#e0b060;letter-spacing:5px}
+[data-theme="steampunk"] .seg .on{fill:#ffae4a} [data-theme="steampunk"] .seg .off{fill:#3a1a06} [data-theme="steampunk"] .seg svg{filter:drop-shadow(0 0 7px #ff8a2a)}
+[data-theme="steampunk"] .agebadge{color:#ffcf8a}
+[data-theme="steampunk"] .slider{background:linear-gradient(90deg,#5a3418,#b8642a 70%,#e0b060)}
+[data-theme="steampunk"] .slider::-webkit-slider-thumb{background:radial-gradient(#ffe2a8,#a8743a 60%,#5a3418);border:3px solid #2a1606;border-radius:50%;width:40px;height:40px}
+[data-theme="steampunk"] .tick{color:#e8c07a} [data-theme="steampunk"] .tick i{background:#3a2414;border-radius:50%} [data-theme="steampunk"] .tick.has i{background:#ffae4a;box-shadow:0 0 8px #ff8a2a}
+[data-theme="steampunk"] .sheet,[data-theme="steampunk"] #today,[data-theme="steampunk"] #viewer{background:#1c140e}
+[data-theme="steampunk"] .sheet{border-color:#a8743a}
+[data-theme="steampunk"] .sheet input,[data-theme="steampunk"] .sheet textarea,[data-theme="steampunk"] .sheet select{background:#0e0804;border-color:#6a4020}
+[data-theme="steampunk"] .td-item,[data-theme="steampunk"] .card .inner{background:#2a1e16}
+[data-theme="steampunk"] .sp-year,[data-theme="steampunk"] .td-date{color:#ffae4a;text-shadow:0 0 14px rgba(255,140,40,.6),0 2px 0 #4a2a10}
+[data-theme="steampunk"] .tnone,[data-theme="steampunk"] .tthumb{background:linear-gradient(135deg,#3a2414,#120c08)}
+[data-theme="steampunk"] .era-hero .scene{filter:sepia(.35) saturate(1.1) contrast(1.05)}
+[data-theme="steampunk"] .era-hero{border:4px solid #a8743a}
+
+/* ===== Sleek Sci-Fi & Quantum: dark glass, cyan light ===== */
+body[data-theme="scifi"]{--red:#ff3d6e;--yellow:#6ef3ff;--blue:#6a5cff;--green:#2fe6a8;--orange:#ff9a3d;--neon:#6ef3ff;--pink:#a98bff;--bg:#03050c;--text:#e8f6ff;--muted:#8aa4c0;--font:"Segoe UI","Roboto","Helvetica Neue",system-ui,sans-serif}
+[data-theme="scifi"] #sky{background:radial-gradient(ellipse at 50% 110%,#0c1a3a 0%,#03050c 65%)}
+[data-theme="scifi"] .brick{border-radius:6px;border:1px solid var(--c);background:color-mix(in srgb,var(--c) 18%,#060b18)!important;color:#e8f6ff;box-shadow:0 0 16px -6px var(--c),inset 0 0 12px -6px var(--c);text-transform:uppercase;letter-spacing:1px}
+[data-theme="scifi"] .b-gray{--c:#4a6a8a}
+[data-theme="scifi"] .b-yellow,[data-theme="scifi"] .b-yellow .tinfo{color:#e8f6ff}
+[data-theme="scifi"] #console{--c:#6ef3ff;background:rgba(10,20,40,.55)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:18px;text-transform:none}
+[data-theme="scifi"] header h1{font-style:normal;font-weight:300;letter-spacing:8px;color:#e8f6ff;text-shadow:0 0 18px rgba(110,243,255,.6)}
+[data-theme="scifi"] .display{background:rgba(0,0,0,.5);border:1px solid rgba(110,243,255,.4);border-radius:12px;box-shadow:inset 0 0 30px rgba(110,243,255,.08)}
+[data-theme="scifi"] .dlabel{letter-spacing:8px;font-weight:400}
+[data-theme="scifi"] .seg .off{fill:#0a2a3a;opacity:.4}
+[data-theme="scifi"] .slider{height:4px;background:linear-gradient(90deg,#2fe6a8,#6ef3ff 70%,#a98bff)}
+[data-theme="scifi"] .slider::-webkit-slider-thumb{background:#03050c;border:2px solid #6ef3ff;border-radius:50%;width:30px;height:30px;box-shadow:0 0 14px #6ef3ff}
+[data-theme="scifi"] .tick{color:#8aa4c0;font-weight:400} [data-theme="scifi"] .tick i{background:#1a2a40;border-radius:50%;width:6px;height:6px} [data-theme="scifi"] .tick.has i{background:#6ef3ff}
+[data-theme="scifi"] .sheet{background:rgba(8,14,30,.96);border:1px solid rgba(110,243,255,.45);border-radius:16px}
+[data-theme="scifi"] #today,[data-theme="scifi"] #viewer{background:#03050c}
+[data-theme="scifi"] .sheet input,[data-theme="scifi"] .sheet textarea,[data-theme="scifi"] .sheet select{background:#03050c;border:1px solid #1e3a5a}
+[data-theme="scifi"] .td-item,[data-theme="scifi"] .card .inner{background:rgba(14,26,50,.8)}
+[data-theme="scifi"] .sp-year,[data-theme="scifi"] .td-date{font-weight:300;letter-spacing:6px;color:#e8f6ff;text-shadow:0 0 18px #6ef3ff}
+[data-theme="scifi"] .tnone,[data-theme="scifi"] .tthumb{background:linear-gradient(135deg,#0c1a3a,#03050c)}
+[data-theme="scifi"] .engage{letter-spacing:6px}
+[data-theme="scifi"] .tile.fact .tinfo p,[data-theme="scifi"] .tile.fact .tinfo b{text-transform:none;letter-spacing:.2px}
+[data-theme="scifi"] .era-hero{border:1px solid rgba(110,243,255,.5);box-shadow:0 0 30px -8px #6ef3ff}
+
+/* ===== Arcane & Temporal Magic: indigo night, gold runes ===== */
+body[data-theme="arcane"]{--red:#a3234a;--yellow:#e8c15a;--blue:#4b3bbd;--green:#1f8f6a;--orange:#c0702a;--neon:#ffd76a;--pink:#9b5cff;--bg:#0b0618;--text:#f4ecff;--muted:#bba8de;--font:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif}
+[data-theme="arcane"] #sky{background:radial-gradient(ellipse at 50% 30%,#24104a 0%,#0b0618 70%)}
+[data-theme="arcane"] .brick{border-radius:14px;border:1.5px solid #e8c15a;background-image:linear-gradient(160deg,rgba(255,255,255,.18),rgba(0,0,0,.3));box-shadow:0 0 14px rgba(232,193,90,.22),inset 0 0 10px rgba(255,255,255,.08)}
+[data-theme="arcane"] .b-gray{background-color:#2a1a4a}
+[data-theme="arcane"] .b-yellow{color:#2a1606}
+[data-theme="arcane"] header h1{font-style:italic;letter-spacing:3px;color:#ffe6a0;text-shadow:0 0 14px rgba(155,92,255,.9),0 0 30px rgba(232,193,90,.35)}
+[data-theme="arcane"] #console{background:radial-gradient(ellipse at 50% 0%,#3a1e6a,#160a30);border:4px double #e8c15a;border-radius:22px}
+[data-theme="arcane"] .display{background:radial-gradient(#140828,#06020e);border:2px solid #e8c15a;border-radius:50px/28px;box-shadow:inset 0 0 24px rgba(155,92,255,.4)}
+[data-theme="arcane"] .dlabel{color:#e8c15a;letter-spacing:5px;font-style:italic}
+[data-theme="arcane"] .seg .on{fill:#ffd76a} [data-theme="arcane"] .seg .off{fill:#2a1650;opacity:.5} [data-theme="arcane"] .seg svg{filter:drop-shadow(0 0 7px #b47aff)}
+[data-theme="arcane"] .agebadge{color:#e0c8ff}
+[data-theme="arcane"] .slider{background:linear-gradient(90deg,#1f8f6a,#4b3bbd 50%,#9b5cff 75%,#e8c15a)}
+[data-theme="arcane"] .slider::-webkit-slider-thumb{background:radial-gradient(#fff2c0,#e8c15a 60%,#8a6a1a);border:2px solid #fff2c0;border-radius:50%;width:36px;height:36px;box-shadow:0 0 16px #b47aff}
+[data-theme="arcane"] .tick{color:#e0c8ff} [data-theme="arcane"] .tick i{background:#2a1650;transform:rotate(45deg)} [data-theme="arcane"] .tick.has i{background:#ffd76a;box-shadow:0 0 8px #ffd76a}
+[data-theme="arcane"] .sheet,[data-theme="arcane"] #today,[data-theme="arcane"] #viewer{background:#140a2a}
+[data-theme="arcane"] .sheet{border:2px solid #e8c15a}
+[data-theme="arcane"] .sheet input,[data-theme="arcane"] .sheet textarea,[data-theme="arcane"] .sheet select{background:#0b0618;border-color:#4a2a7a}
+[data-theme="arcane"] .td-item,[data-theme="arcane"] .card .inner{background:#1e1040}
+[data-theme="arcane"] .sp-year,[data-theme="arcane"] .td-date{color:#ffe6a0;text-shadow:0 0 16px #9b5cff}
+[data-theme="arcane"] .tnone,[data-theme="arcane"] .tthumb{background:linear-gradient(135deg,#2a1650,#0b0618)}
+[data-theme="arcane"] .era-hero .scene{filter:hue-rotate(-12deg) saturate(1.15)}
+[data-theme="arcane"] .era-hero{border:2px solid #e8c15a;box-shadow:0 0 30px rgba(155,92,255,.45)}
 </style>
 </head>
-<body>
+<body data-theme="brick">
 <div id="app">
   <div id="sky"><canvas id="stars"></canvas><div class="sun"></div><div class="grid"></div></div>
   <header>
@@ -283,6 +428,7 @@ label.chk input{width:22px;height:22px}
     <button class="hbtn brick b-gray press" id="lockBtn" aria-label="Grown-up lock">🔒</button>
   </header>
   <div class="status" id="status"></div>
+  <div id="engineBadge" hidden></div>
 
   <section id="console" class="brick studs">
     <div class="display">
@@ -298,7 +444,8 @@ label.chk input{width:22px;height:22px}
     <div class="ticks" id="ticks"></div>
     <div class="controls">
       <button class="engage brick studs b-red press" id="engage">ENGAGE</button>
-      <button class="ghost brick studs b-blue press" id="random">🎲 Surprise Jump</button>
+      <button class="ghost brick studs b-green press" id="myJump">⭐ My Jump</button>
+      <button class="ghost brick studs b-blue press" id="random">🎲 Surprise</button>
     </div>
   </section>
 
@@ -368,6 +515,11 @@ label.chk input{width:22px;height:22px}
     <label for="sMe">Your name, the way he says it</label>
     <input id="sMe" maxlength="40" placeholder="Uncle …">
 
+    <h3>🎨 Look</h3>
+    <label for="sTheme">Time machine theme</label>
+    <select id="sTheme"></select>
+    <div class="note">Changes the whole look, the warp and the narrator's launch words. You see it right away; Save keeps it.</div>
+
     <h3>🤖 Robot narrator</h3>
     <div class="app-only"><label for="sEngine">Narrator voice</label>
     <select id="sEngine"><option value="phone">Phone's real voices + character effects</option><option value="retro">Retro computer voice (built in)</option></select></div>
@@ -408,6 +560,13 @@ label.chk input{width:22px;height:22px}
     <div class="rec" id="sRec"></div>
     <label for="sGFx">🎭 Voice changer for the welcome message</label>
     <div class="rec"><select id="sGFx" style="flex:1"></select><button type="button" class="btn brick b-blue press" id="sGFxTry">▶ Hear it</button></div>
+
+    <div class="app-only">
+    <h3>⚙️ Temporal Engine</h3>
+    <div class="note">Links the brass console (ESP32) over Bluetooth. Bluetooth is a short-range radio between the engine and this device, not the internet.</div>
+    <label class="chk"><input type="checkbox" id="sEngineOn"> Link to the Temporal Engine</label>
+    <div class="note">Status: <b id="sEngineState">Not linked</b></div>
+    </div>
 
     <h3>💾 Backup</h3>
     <div class="note" id="sBackupNote"></div>
@@ -474,6 +633,7 @@ label.chk input{width:22px;height:22px}
   </div>
 </div>
 <div id="lightbox"><button aria-label="Close">✕</button></div>
+<input type="file" id="factFile" accept="image/*" hidden>
 <div id="toast"></div>
 
 <script>
@@ -797,6 +957,7 @@ if(IS_APP){ document.body.classList.add("is-app"); const o=document.querySelecto
 const NOW = new Date();
 const THIS_YEAR = NOW.getFullYear();
 const MIN_YEAR = 1950;
+const MAX_YEAR = 3000;
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const COLORS = ["var(--red)","var(--yellow)","var(--blue)","var(--green)","var(--orange)"];
 const ICONS = ["🧱","🚀","⏰","🦖","🎂","🏖️","🚲","⚽","🎨","🎄","🛸","🤖"];
@@ -861,10 +1022,174 @@ const HISTORY = {
  "12-25":[[2021,"The James Webb Space Telescope launched to look back in time at the first galaxies."]],
 };
 
+/* ---------- ERAS: filler for years with no family memories (drawn in code, no image files) ---------- */
+const ERAS = [
+ {key:"50s",from:MIN_YEAR,to:1959,name:"the Fabulous Fifties",emoji:"📺",
+  blurb:"Families gathered around brand new black and white TVs, and big cars had shiny tail fins.",
+  facts:[["📺","TV comes home","By 1960, almost 9 out of 10 American homes had a television. The shows were black and white."],
+         ["🎸","Rock and roll","Elvis Presley made rock and roll a sensation in 1956.",1956],
+         ["🛰️","The first satellite","Sputnik 1, the first satellite ever, was launched in 1957. It beeped as it circled the Earth.",1957],
+         ["🧱","The LEGO brick","The modern LEGO brick, with tubes inside so bricks snap together tightly, was patented in 1958.",1958],
+         ["🖥️","Room-sized computers","Early computers like UNIVAC filled a whole room, and were far weaker than a calculator today.",1951]]},
+ {key:"60s",from:1960,to:1969,name:"the Space Race Sixties",emoji:"🚀",
+  blurb:"America and the Soviet Union raced to space, all the way to the Moon.",
+  facts:[["👨‍🚀","First human in space","Yuri Gagarin orbited the Earth in 1961.",1961],
+         ["📡","TV from space","In 1962 the Telstar satellite sent the first live TV pictures across the ocean.",1962],
+         ["🎸","The Beatles","The Beatles played on American TV in 1964 and kids went wild.",1964],
+         ["🌕","Footprints on the Moon","Neil Armstrong and Buzz Aldrin walked on the Moon in 1969.",1969]]},
+ {key:"70s",from:1970,to:1979,name:"the Groovy Seventies",emoji:"🕺",
+  blurb:"Disco music, roller skates, and the very first video games.",
+  facts:[["🏓","Pong","Pong came out in 1972, one of the very first arcade video games.",1972],
+         ["🧩","The Rubik's Cube","Ernő Rubik invented his twisty puzzle cube in 1974.",1974],
+         ["🛰️","Voyager","Voyager 1 and 2 launched in 1977. Voyager 1 is still flying through space today!",1977],
+         ["💾","Home computers","Computers small enough for a desk, like the Apple II, arrived in 1977.",1977],
+         ["🎬","Star Wars","The first Star Wars movie came out in 1977.",1977]]},
+ {key:"80s",from:1980,to:1989,name:"the Radical Eighties",emoji:"🕹️",
+  blurb:"Arcades, neon colors, video tapes, and a famous movie about a time machine.",
+  facts:[["🟡","Pac-Man","Pac-Man munched his way into arcades in 1980.",1980],
+         ["🚀","The Space Shuttle","The first Space Shuttle, Columbia, launched in 1981.",1981],
+         ["⚡","Back to the Future","The movie Back to the Future came out in 1985. Great Scott!",1985],
+         ["🎮","Nintendo","The Nintendo Entertainment System came to America in 1985.",1985],
+         ["🎮","Game Boy","The Game Boy came out in 1989, so kids could play anywhere.",1989]]},
+ {key:"90s",from:1990,to:1999,name:"the Nineties",emoji:"🌐",
+  blurb:"The internet was born, and the Hubble telescope opened its eye on the universe.",
+  facts:[["🔭","Hubble","The Hubble Space Telescope launched in 1990.",1990],
+         ["🌐","The first website","The first website went live in 1991.",1991],
+         ["🦖","Jurassic Park","Jurassic Park brought dinosaurs to movie theaters in 1993.",1993],
+         ["🤖","A rover on Mars","A little rover named Sojourner rolled across Mars in 1997.",1997],
+         ["🛰️","Space station","The first piece of the International Space Station launched in 1998.",1998]]},
+ {key:"00s",from:2000,to:2009,name:"the Two-Thousands",emoji:"📱",
+  blurb:"People moved into space for good, and phones got smart.",
+  facts:[["🛰️","Living in space","The first crew moved into the International Space Station in 2000. People have lived in space ever since!",2000],
+         ["🤖","Twin rovers","Spirit and Opportunity landed on Mars in 2004.",2004],
+         ["📺","YouTube","YouTube started in 2005.",2005],
+         ["📱","The iPhone","The first iPhone was shown to the world in 2007.",2007]]},
+ {key:"10s",from:2010,to:2019,name:"the Twenty-Tens",emoji:"⛏️",
+  blurb:"Rovers, rockets that land themselves, and building whole worlds out of blocks.",
+  facts:[["⛏️","Minecraft","Minecraft was fully released in 2011.",2011],
+         ["🤖","Curiosity","NASA's Curiosity rover landed on Mars in 2012.",2012],
+         ["🧱","The LEGO Movie","The LEGO Movie came out in 2014. Everything is awesome!",2014],
+         ["🪐","Hello, Pluto","New Horizons flew past Pluto in 2015 and sent back the first close-up pictures.",2015],
+         ["🚀","Rockets land!","In 2015 a SpaceX rocket flew to space and landed back on Earth, standing up.",2015]]},
+ {key:"20s",from:2020,to:THIS_YEAR,name:"the Twenty-Twenties",emoji:"🚁",
+  blurb:"A helicopter flew on Mars, and a giant gold telescope looked back in time.",
+  facts:[["🚁","Flying on Mars","In 2021 a tiny helicopter called Ingenuity made the first powered flight on another planet.",2021],
+         ["🔭","James Webb","The James Webb Space Telescope launched in 2021 and sent its first pictures in 2022.",2022],
+         ["🌑","Back to the Moon","In 2022 the Artemis I spacecraft flew around the Moon and came home.",2022],
+         ["🤖","AI helpers","Computers you can talk to became everyday helpers."]]},
+ {key:"near",from:THIS_YEAR+1,to:2049,name:"the Near Future",emoji:"🌕",future:true,
+  blurb:"Nobody knows yet, but people are already building the future.",
+  facts:[["🌕","Moon bases","People are planning to return to the Moon and build bases there."],
+         ["🚗","Cars that drive themselves","Cars that drive themselves might be everywhere."],
+         ["🤖","Robot helpers","Robots might help with chores at home."],
+         ["🧑‍🔧","You, all grown up","By now you are a grown-up. What will you build?"]]},
+ {key:"mid",from:2050,to:2099,name:"the Mars Age",emoji:"🔴",future:true,
+  blurb:"Maybe the first cities on Mars, under glass domes.",
+  facts:[["🔴","Cities on Mars","Maybe the first towns on Mars, under big glass domes."],
+         ["☄️","Halley's Comet","This one is real: Halley's Comet comes back in 2061. It visits about every 76 years.",2061],
+         ["🚄","Tube trains","Super fast trains might zoom through tubes between cities."],
+         ["☀️","Clean power","Maybe almost all power comes from the Sun and the wind."]]},
+ {key:"c22",from:2100,to:2299,name:"the Sky City Centuries",emoji:"🛗",future:true,
+  blurb:"Elevators to space and cities floating on the sea, maybe.",
+  facts:[["🛗","Space elevator","Maybe an elevator on a super strong cable, reaching all the way to space."],
+         ["🌊","Floating cities","Whole cities might float on the ocean."],
+         ["⛏️","Asteroid miners","Robots might mine asteroids for metal."],
+         ["🌳","Sky farms","Farms could be stacked in towers as tall as skyscrapers."]]},
+ {key:"star",from:2300,to:2599,name:"the Star Voyager Age",emoji:"🌌",future:true,
+  blurb:"Maybe starships sailing toward other stars.",
+  facts:[["🌌","Starships","Starships might sail to the nearest stars. Even at top speed, the trip could take many years."],
+         ["🪐","Saturn stations","Space stations might circle Saturn and its moons."],
+         ["🛰️","Old friend Voyager","Voyager 1, launched in 1977, will still be drifting silently between the stars."],
+         ["👽","Hello out there?","Maybe we will have found out if anyone else is out there."]]},
+ {key:"far",from:2600,to:MAX_YEAR,name:"the Far Future",emoji:"🌠",future:true,
+  blurb:"Almost a thousand years from now. Anything could happen!",
+  facts:[["🌠","Many worlds","Maybe people live on many worlds across the solar system and beyond."],
+         ["🕰️","The year 3000","The year 3000 is a thousand years after the year 2000!",3000],
+         ["⭐","The stars move","This one is real: the stars slowly shift. Over thousands of years, even the North Star changes."],
+         ["🧱","Still building","Whatever happens, someone will still be snapping bricks together."]]},
+];
+function eraOf(y){ return ERAS.find(e=>y>=e.from&&y<=e.to) || ERAS[ERAS.length-1]; }
+function yearFacts(y){
+  const era=eraOf(y), out=[];
+  for(const [md,list] of Object.entries(HISTORY)) for(const [yy,t] of list) if(yy===y) out.push(["📰",`${MONTHS[+md.slice(0,2)-1]} ${+md.slice(3)}, ${y}`,t,y,true,`h-${md}-${y}-${out.length}`]);
+  const words=s=>new Set(s.toLowerCase().match(/[a-z]{5,}/g)||[]);
+  const dup=x=>x[3]===y && out.some(o=>{ const a=words(o[2]); let n=0; for(const w of words(x[2])) if(a.has(w)) n++; return n>=2; });
+  const f=era.facts.map(x=>{ const a=[...x]; a[5]=`e-${era.key}-${safeName(x[1])}`; return a; }).filter(x=>!dup(x)); f.sort((a,b)=>(b[3]===y)-(a[3]===y));
+  return [...out, ...f];
+}
+
+/* seeded random so each year has its own (but repeatable) scene */
+function rng(seed){ let a=seed>>>0; return ()=>{ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function eraScene(y){
+  const e=eraOf(y), R=rng(y*7919+13), W=800, H=260, G=200; let s="";
+  const pick=a=>a[Math.floor(R()*a.length)];
+  const SKY={ "50s":["#7ec8f0","#f7e3b0"], "60s":["#0a1030","#2b2f6b"], "70s":["#ff9a4d","#ffd27a"], "80s":["#12002b","#5a0f5e"],
+    "90s":["#4fa3e0","#bfe6ff"], "00s":["#2e7fd0","#a8dcff"], "10s":["#1c2b5a","#e88b5a"], "20s":["#0b1a3a","#3a5fa0"],
+    "near":["#0d1640","#4a6fc0"], "mid":["#7a2f1a","#e8955a"], "c22":["#2a6fb0","#bfe9ff"], "star":["#02020c","#14102e"], "far":["#090018","#3a0a5a"] }[e.key];
+  const night=["60s","80s","star","far","20s","near"].includes(e.key);
+  s+=`<defs><linearGradient id="sk${y}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SKY[0]}"/><stop offset="1" stop-color="${SKY[1]}"/></linearGradient></defs>`;
+  s+=`<rect width="${W}" height="${H}" fill="url(#sk${y})"/>`;
+  const fut=!!e.future;
+  if(night) for(let i=0;i<70;i++){ const tw=R()<.35; s+=`<circle cx="${(R()*W).toFixed(0)}" cy="${(R()*G*.8).toFixed(0)}" r="${(R()*1.4+.3).toFixed(1)}" fill="#fff" opacity="${(R()*.7+.3).toFixed(2)}"${tw?` class="tw" style="animation-delay:-${(R()*3).toFixed(1)}s"`:""}/>`; }
+  // sky objects
+  const sx=80+R()*640;
+  if(e.key==="70s") for(let i=0;i<5;i++) s+=`<rect x="0" y="${120+i*14}" width="${W}" height="7" fill="${["#ff5e3a","#ff8a3a","#ffb03a","#ffd23a","#fff07a"][i]}" opacity=".35"/>`;
+  if(["50s","90s","00s","c22"].includes(e.key)) s+=`<circle cx="${sx}" cy="54" r="26" fill="#fff6c8"/><circle cx="${sx}" cy="54" r="40" fill="#fff6c8" opacity=".25"/>`;
+  if(["60s","near","20s"].includes(e.key)) s+=`<circle cx="${sx}" cy="60" r="${e.key==="60s"?34:24}" fill="#e9e6d8"/><circle cx="${sx-10}" cy="52" r="6" fill="#cfcab4"/><circle cx="${sx+9}" cy="70" r="4" fill="#cfcab4"/>${e.key==="near"?`<path d="M${sx-8} 46 a8 8 0 0 1 16 0z" fill="#9ff" opacity=".9"/><circle class="anim-pulse" cx="${sx}" cy="40" r="2.5" fill="#f55"/>`:""}`;
+  if(e.key==="mid") s+=`<circle cx="${sx}" cy="50" r="14" fill="#fff1c9" opacity=".8"/><circle cx="${(sx+300)%760+20}" cy="30" r="4" fill="#ccc"/>`;
+  if(e.key==="star"||e.key==="far"){ const px=120+R()*560, pr=40+R()*30, hue=Math.floor(R()*360);
+    s+=`<g class="anim-float"><circle cx="${px}" cy="80" r="${pr}" fill="hsl(${hue},55%,55%)"/><circle cx="${px-pr*.3}" cy="${80-pr*.3}" r="${pr*.75}" fill="hsl(${hue},60%,68%)" opacity=".35"/><ellipse cx="${px}" cy="80" rx="${pr*1.9}" ry="${pr*.38}" fill="none" stroke="hsl(${(hue+40)%360},70%,80%)" stroke-width="5" opacity=".7" transform="rotate(-14 ${px} 80)"/></g>`; }
+  if(e.key==="far") s+=`<g class="anim-spin"><ellipse cx="${W-150}" cy="60" rx="110" ry="26" fill="#c89bff" opacity=".18" transform="rotate(20 ${W-150} 60)"/><ellipse cx="${W-150}" cy="60" rx="50" ry="10" fill="#fff" opacity=".25" transform="rotate(20 ${W-150} 60)"/><ellipse cx="${W-150}" cy="60" rx="80" ry="4" fill="#e8d8ff" opacity=".2" transform="rotate(-30 ${W-150} 60)"/></g>`;
+  if(y===2061||(e.key==="mid"&&R()<.25)) s+=`<g class="anim-comet"><path d="M560 40 L760 10" stroke="#bff" stroke-width="6" stroke-linecap="round" opacity=".35"/><circle cx="560" cy="40" r="7" fill="#fff"/></g>`;
+  if(e.key==="50s"&&y>=1957) s+=`<circle cx="${(sx+260)%720+40}" cy="34" r="3" fill="#ddd"/><path d="M${(sx+260)%720+40} 34 l-12 -8 M${(sx+260)%720+40} 34 l-12 8" stroke="#ddd"/>`;
+  if((e.key==="70s"&&y>=1977)||e.key==="star") s+=satellite(sx<400?600:180,50,1.1,"#e8e8f0");
+  if(e.key==="90s") s+=hubble(sx<400?620:160,48);
+  if(e.key==="00s"||e.key==="10s") s+=station(sx<400?620:170,46);
+  // ground
+  const groundCol={ "50s":"#6fbf5a","60s":"#2a3a2a","70s":"#7a5a3a","80s":"#12002b","90s":"#5a8a4a","00s":"#4a7a4a","10s":"#2a3040","20s":"#1a2238","near":"#1a2238","mid":"#a8492a","c22":"#2a7ab0","star":"#1a1030","far":"#1a0830" }[e.key];
+  s+=`<rect y="${G}" width="${W}" height="${H-G}" fill="${groundCol}"/>`;
+  if(e.key==="80s"){ for(let i=0;i<=16;i++) s+=`<line x1="${400+(i-8)*20}" y1="${G}" x2="${400+(i-8)*140}" y2="${H}" stroke="#ff3fb4" stroke-width="1.5" opacity=".7"/>`;
+    for(let i=0;i<5;i++) s+=`<line x1="0" y1="${G+3+i*i*3}" x2="${W}" y2="${G+3+i*i*3}" stroke="#ff3fb4" stroke-width="1.5" opacity=".7"/>`; }
+  if(e.key==="c22") for(let i=0;i<6;i++) s+=`<path d="M0 ${G+8+i*9} q50 -6 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0" fill="none" stroke="#bfe9ff" opacity=".35"/>`;
+  // buildings
+  const lvl={ "50s":0,"60s":0,"70s":1,"80s":2,"90s":2,"00s":3,"10s":3,"20s":4,"near":5,"mid":0,"c22":6,"star":6,"far":7 }[e.key];
+  if(lvl===0 && e.key!=="mid"){ for(let x=10;x<W;x+=90+R()*40){ const c=pick(["#e8d0a0","#f0b8a0","#a0c8e8","#c0e0b0","#f4e2c0"]); s+=house(x,G,60+R()*20,c,e.key==="50s"&&R()<.6); } }
+  else if(e.key==="mid"){ for(let i=0;i<5;i++){ const x=60+i*160+R()*40, w=60+R()*50; s+=`<path d="M${x-w/2} ${G} a${w/2} ${w/2} 0 0 1 ${w} 0z" fill="#bfe9ff" opacity=".55" stroke="#fff" stroke-opacity=".7"/><rect x="${x-8}" y="${G-14}" width="16" height="14" fill="#e8e0d0" opacity=".8"/><circle class="anim-pulse" style="animation-delay:-${(R()*2).toFixed(1)}s" cx="${x}" cy="${G-w/2+6}" r="3" fill="#ffe27a"/>`; }
+    s+=`<g class="anim-drive"><g transform="translate(${100+R()*400} ${G-8})"><rect width="36" height="12" rx="3" fill="#ddd"/><circle cx="6" cy="14" r="5" fill="#444"/><circle cx="30" cy="14" r="5" fill="#444"/><line x1="26" y1="0" x2="30" y2="-14" stroke="#ddd" stroke-width="2"/><rect x="26" y="-20" width="10" height="6" fill="#ddd"/></g></g>`; }
+  else { let x=0; while(x<W){ const w=30+R()*50, h=(40+R()*60)*(0.6+lvl*0.28), col=lvl>=5?pick(["#1d2a55","#22305f","#2a2a60","#162248"]):pick(["#3a4566","#4a5070","#56607a","#2f3a55","#6a7090"]);
+      if(lvl>=7&&R()<.4){ const yy=G-h-20; s+=`<path class="anim-pulse" style="animation-delay:-${(R()*2).toFixed(1)}s;animation-duration:${(2+R()*2).toFixed(1)}s" d="M${x} ${yy} l${w/2} ${-40-R()*40} l${w/2} ${40+R()*40}z" fill="#a98bff" opacity=".8"/><ellipse cx="${x+w/2}" cy="${yy+6}" rx="${w*.7}" ry="8" fill="#5a3a9a"/>`; x+=w+10; continue; }
+      s+=`<rect x="${x.toFixed(0)}" y="${(G-h).toFixed(0)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" fill="${col}"/>`;
+      if(lvl>=5 && R()<.5) s+=`<path d="M${x} ${G-h} a${w/2} ${w/3} 0 0 1 ${w} 0z" fill="${col}"/><line x1="${x+w/2}" y1="${G-h-w/3}" x2="${x+w/2}" y2="${G-h-w/3-18}" stroke="#9ff" stroke-width="2"/><circle class="anim-pulse" style="animation-delay:-${(R()*2).toFixed(1)}s" cx="${x+w/2}" cy="${G-h-w/3-19}" r="2.5" fill="#ff5a5a"/>`;
+      const wc=night?(lvl>=5?"#7ff":"#ffd86a"):"#cfe8ff";
+      for(let wy=G-h+8; wy<G-8; wy+=12) for(let wx=x+6; wx<x+w-8; wx+=10) if(R()<(night?.45:.8)) s+=`<rect${fut&&R()<.06?` class="anim-pulse" style="animation-delay:-${(R()*3).toFixed(1)}s;animation-duration:${(1.5+R()*3).toFixed(1)}s"`:""} x="${wx.toFixed(0)}" y="${wy.toFixed(0)}" width="5" height="6" fill="${wc}" opacity="${night?.9:.6}"/>`;
+      x+=w+2+R()*14; } }
+  if(e.key==="c22") s+=`<line x1="${sx}" y1="${G}" x2="${sx}" y2="0" stroke="#e8f4ff" stroke-width="3"/><g class="anim-lift"><rect x="${sx-7}" y="100" width="14" height="18" rx="3" fill="#fff"/><rect x="${sx-4}" y="104" width="8" height="5" fill="#5ad0ff"/></g>`;
+  // hero vehicles
+  if(e.key==="50s") s+=carOld(200+R()*350,G+30,pick(["#e04a5a","#4ab0d0","#f0a0c0"]));
+  if(e.key==="60s") s+=rocket(560+R()*120,G-10,1.3,true);
+  if(e.key==="70s"||e.key==="90s"||e.key==="00s") s+=car(140+R()*480,G+34,pick(["#d23a3a","#3a7ad2","#e8c03a","#3aa060"]));
+  if(e.key==="80s") s+=car(300+R()*200,G+40,"#c0c8d8",true);
+  if(e.key==="10s") s+=rocket(620+R()*100,G-4,1,false);
+  if(e.key==="20s"||e.key==="near") s+=`<g class="${fut?"anim-bob":""}"><g transform="translate(${150+R()*450} ${G-80})"><rect x="-10" y="0" width="20" height="10" rx="4" fill="#ccc"/><line x1="-26" y1="-6" x2="26" y2="-6" stroke="#ddd" stroke-width="2"/><line x1="0" y1="-6" x2="0" y2="0" stroke="#ddd" stroke-width="2"/><line x1="-6" y1="10" x2="-10" y2="20" stroke="#ccc"/><line x1="6" y1="10" x2="10" y2="20" stroke="#ccc"/></g></g>`;
+  if(["near","c22","star","far"].includes(e.key)) for(let i=0;i<(e.key==="near"?3:5);i++){ const fl=R()<.5;
+    s+=`<g class="anim-fly" style="animation-duration:${(7+R()*9).toFixed(1)}s;animation-delay:-${(R()*16).toFixed(1)}s${fl?"":";animation-direction:reverse"}"><g class="anim-bob" style="animation-delay:-${(R()*2).toFixed(1)}s">${flyCar(400,40+R()*110,pick(["#ff5a7a","#5ad0ff","#ffd25a","#a07aff","#5affb0"]),fl)}</g></g>`; }
+  if(e.key==="star"||e.key==="far"){ const fl=R()<.5; s+=`<g class="anim-fly" style="animation-duration:${(18+R()*10).toFixed(1)}s;animation-delay:-${(R()*20).toFixed(1)}s${fl?";animation-direction:reverse":""}">${ship(400,50+R()*60,fl)}</g>`; }
+  return `<svg class="scene" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s}</svg>`;
+}
+function house(x,g,w,c,ant){ const h=w*.6; return `<rect x="${x}" y="${g-h}" width="${w}" height="${h}" fill="${c}"/><path d="M${x-6} ${g-h} L${x+w/2} ${g-h-w*.42} L${x+w+6} ${g-h}z" fill="#9a4a3a"/><rect x="${x+w*.4}" y="${g-h*.55}" width="${w*.2}" height="${h*.55}" fill="#6a3a2a"/><rect x="${x+w*.1}" y="${g-h*.75}" width="${w*.2}" height="${w*.2}" fill="#bfe6ff"/><rect x="${x+w*.7}" y="${g-h*.75}" width="${w*.2}" height="${w*.2}" fill="#bfe6ff"/>${ant?`<path d="M${x+w*.7} ${g-h-w*.2} v-22 m-10 0 h20 m-16 -6 h12" stroke="#333" stroke-width="2" fill="none"/>`:""}`; }
+function carOld(x,y,c){ return `<g transform="translate(${x} ${y})"><path d="M0 0 h120 l10 -14 l-18 -4 l-16 -18 h-46 l-18 18 l-28 4z" fill="${c}"/><path d="M48 -34 h40 l12 14 h-62z" fill="#bfe6ff"/><path d="M118 -14 l18 -10 v10z" fill="${c}"/><circle cx="26" cy="2" r="10" fill="#222"/><circle cx="96" cy="2" r="10" fill="#222"/><circle cx="26" cy="2" r="4" fill="#ddd"/><circle cx="96" cy="2" r="4" fill="#ddd"/></g>`; }
+function car(x,y,c,gull){ return `<g transform="translate(${x} ${y})"><path d="M0 0 h130 v-14 l-24 -6 l-18 -16 h-44 l-24 18 l-20 4z" fill="${c}"/><path d="M50 -32 h34 l14 12 h-60z" fill="#22303f"/>${gull?`<path d="M40 -10 h60" stroke="#666"/><rect x="0" y="-8" width="130" height="3" fill="#ff3fb4" opacity=".6"/>`:""}<circle cx="28" cy="2" r="10" fill="#222"/><circle cx="104" cy="2" r="10" fill="#222"/></g>`; }
+function flyCar(x,y,c,flip){ return `<g transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) scale(${flip?-1:1} 1)"><ellipse cx="0" cy="0" rx="26" ry="7" fill="${c}"/><path d="M-10 -4 a12 9 0 0 1 22 0z" fill="#bff" opacity=".85"/><path d="M26 0 h22" stroke="${c}" stroke-width="3" opacity=".45" stroke-linecap="round"/><ellipse cx="0" cy="8" rx="16" ry="3" fill="#7ff" opacity=".35"/></g>`; }
+function rocket(x,g,s,smoke){ return `<g transform="translate(${x} ${g}) scale(${s})">${smoke?`<ellipse cx="0" cy="6" rx="50" ry="14" fill="#eee" opacity=".7"/><ellipse cx="-30" cy="0" rx="24" ry="12" fill="#ddd" opacity=".7"/>`:""}<path d="M0 -40 l-6 30 h12z" fill="#ff9a3a"/><rect x="-10" y="-120" width="20" height="82" fill="#f4f4f4"/><path d="M-10 -120 q10 -30 20 0z" fill="#d6202a"/><path d="M-10 -50 l-12 14 v6 l12 -6z M10 -50 l12 14 v6 l-12 -6z" fill="#d6202a"/><circle cx="0" cy="-96" r="4" fill="#3a7ad2"/>${smoke?"":`<path d="M-10 -40 l-10 16 M10 -40 l10 16" stroke="#aaa" stroke-width="2"/>`}</g>`; }
+function satellite(x,y,s,c){ return `<g transform="translate(${x} ${y}) scale(${s})"><rect x="-6" y="-6" width="12" height="12" fill="${c}"/><rect x="-34" y="-4" width="24" height="8" fill="#3a5aa0"/><rect x="10" y="-4" width="24" height="8" fill="#3a5aa0"/><path d="M0 -6 v-10 m-8 0 a8 4 0 0 0 16 0" stroke="${c}" fill="none"/></g>`; }
+function hubble(x,y){ return `<g transform="translate(${x} ${y}) rotate(-20)"><rect x="-30" y="-8" width="60" height="16" rx="3" fill="#d8d8e0"/><rect x="-22" y="-26" width="10" height="52" fill="#3a5aa0"/><rect x="12" y="-26" width="10" height="52" fill="#3a5aa0"/><rect x="30" y="-6" width="6" height="12" fill="#888"/></g>`; }
+function station(x,y){ return `<g transform="translate(${x} ${y})"><rect x="-40" y="-2" width="80" height="4" fill="#ccc"/><rect x="-10" y="-6" width="20" height="12" fill="#e8e8e8"/>${[-38,-24,16,30].map(a=>`<rect x="${a}" y="-18" width="10" height="36" fill="#c8963a" opacity=".85"/>`).join("")}</g>`; }
+function ship(x,y,flip){ return `<g transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) scale(${flip?-1:1} 1)"><path d="M0 0 l60 -8 l20 8 l-20 8z" fill="#e8ecf8"/><path d="M8 0 l-14 -12 h10 l16 10z M8 0 l-14 12 h10 l16 -10z" fill="#a0aac8"/><circle cx="58" cy="0" r="3" fill="#7ff"/><path d="M-6 -3 h-30 M-6 3 h-24" stroke="#7ff" stroke-width="3" opacity=".6" stroke-linecap="round"/></g>`; }
+
 /* ---------- state ---------- */
 const state = {
   config:{ name:"", birthday:"2012-01-01", me:"", style:"robot", voiceURI:"", greeting:null },
-  memories:[], year:THIS_YEAR, arrivedYear:null, sound:true, music:true, persistent:true,
+  memories:[], factPhotos:{}, year:THIS_YEAR, arrivedYear:null, sound:true, music:true, persistent:true,
 };
 
 /* ---------- helpers ---------- */
@@ -917,12 +1242,94 @@ const store={
 
 /* ---------- background stars ---------- */
 const sc=$("#stars"), sx=sc.getContext("2d"); let bg=[];
-function sizeStars(){ sc.width=innerWidth*devicePixelRatio; sc.height=innerHeight*.7*devicePixelRatio;
+function sizeStars(){ sc.width=innerWidth*devicePixelRatio; sc.height=innerHeight*(themeKey==="brick"?.7:1)*devicePixelRatio; if(typeof themeSetup==="function") setTimeout(themeSetup,0);
   bg=Array.from({length:120},()=>({x:Math.random()*sc.width,y:Math.random()*sc.height,r:Math.random()*1.5*devicePixelRatio+.4,t:Math.random()*6})); }
-function drawStars(ts){ sx.clearRect(0,0,sc.width,sc.height);
+function drawStars(ts){
+  if(themeKey!=="brick"){ drawThemeBg(ts); requestAnimationFrame(drawStars); return; }
+  sx.clearRect(0,0,sc.width,sc.height);
   for(const s of bg){ sx.fillStyle=`rgba(220,230,255,${.3+.35*Math.sin(ts/900+s.t)})`; sx.beginPath(); sx.arc(s.x,s.y,s.r,0,7); sx.fill(); }
   requestAnimationFrame(drawStars); }
-addEventListener("resize",sizeStars); sizeStars(); requestAnimationFrame(drawStars);
+addEventListener("resize",sizeStars);
+/* ---------- THEMES ---------- */
+const THEMES={
+  brick:    {name:"🧱 Toy Bricks",                 engage:"ENGAGE",       power:"TIME POWER",     go:"Engage!"},
+  vintage:  {name:"🕰️ Vintage Time Machine",       engage:"DEPART",       power:"CHRONO DRIVE",   go:"Pull the lever. We depart!"},
+  steampunk:{name:"⚙️ Steampunk",                  engage:"FULL STEAM",   power:"STEAM PRESSURE", go:"Full steam ahead!"},
+  scifi:    {name:"🌀 Sleek Sci-Fi & Quantum",     engage:"INITIATE",     power:"QUANTUM FLUX",   go:"Initiating quantum jump!"},
+  arcane:   {name:"🔮 Arcane & Temporal Magic",    engage:"✦ CAST ✦",     power:"MAGIC POWER",    go:"Abracadabra! Through the ages we fly!"},
+};
+let themeKey="brick";
+function applyTheme(t){
+  themeKey=THEMES[t]?t:"brick"; const T=THEMES[themeKey];
+  document.body.dataset.theme=themeKey;
+  $("#engage").textContent=T.engage; $("#power .lbl").textContent=T.power;
+  sizeStars();
+}
+/* animated background per theme (the original starfield for bricks) */
+const RUNES="ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ✦☾☽✧";
+let bgx=[];
+function themeSetup(){
+  const W=sc.width, H=sc.height, d=devicePixelRatio, R=Math.random;
+  if(themeKey==="vintage") bgx=Array.from({length:70},()=>({x:R()*W,y:R()*H,r:(R()*2+.5)*d,v:(R()*.25+.05)*d,t:R()*6}));
+  else if(themeKey==="steampunk") bgx=[[.12,.25,.16,14,1],[.3,.12,.09,10,-1.6],[.88,.3,.2,18,.75],[.75,.75,.13,12,-1.15],[.08,.85,.11,11,1.3]].map(([x,y,r,n,s])=>({x:x*W,y:y*H,r:r*Math.min(W,H)*1.6,n,s}));
+  else if(themeKey==="scifi") bgx=Array.from({length:55},()=>({x:R()*W,y:R()*H,vx:(R()-.5)*.3*d,vy:(R()-.5)*.3*d}));
+  else if(themeKey==="arcane") bgx=Array.from({length:120},()=>({x:R()*W,y:R()*H,r:(R()*1.4+.3)*d,t:R()*6,c:R()<.3?"255,215,120":"220,200,255"})).concat(Array.from({length:14},()=>({rune:RUNES[Math.floor(R()*RUNES.length)],x:R()*W,y:R()*H,v:(R()*.2+.08)*d,t:R()*6})));
+}
+function gear(c,x,y,r,n,rot){ c.beginPath(); for(let i=0;i<n*2;i++){ const a0=rot+i*Math.PI/n, a1=a0+Math.PI/n, rr=i%2?r*.82:r;
+  c.arc(x,y,rr,a0+(i%2?0:.08),a1-(i%2?0:.08)); } c.closePath(); c.moveTo(x+r*.35,y); c.arc(x,y,r*.35,0,7); }
+function drawThemeBg(ts){
+  const c=sx, W=sc.width, H=sc.height, d=devicePixelRatio; c.clearRect(0,0,W,H);
+  if(themeKey==="vintage"){
+    const cx=W*.78, cy=H*.42, r=Math.min(W,H)*.34; c.strokeStyle="rgba(230,190,120,.12)"; c.lineWidth=3*d;
+    c.beginPath(); c.arc(cx,cy,r,0,7); c.stroke(); c.beginPath(); c.arc(cx,cy,r*.86,0,7); c.stroke();
+    for(let i=0;i<60;i++){ const a=i/60*Math.PI*2, l=i%5?r*.05:r*.11; c.beginPath(); c.moveTo(cx+Math.cos(a)*(r*.86),cy+Math.sin(a)*(r*.86)); c.lineTo(cx+Math.cos(a)*(r*.86-l),cy+Math.sin(a)*(r*.86-l)); c.stroke(); }
+    const hm=-ts/9000, hh=-ts/60000; c.lineWidth=6*d; c.lineCap="round";
+    c.beginPath(); c.moveTo(cx,cy); c.lineTo(cx+Math.cos(hm)*r*.7,cy+Math.sin(hm)*r*.7); c.stroke();
+    c.beginPath(); c.moveTo(cx,cy); c.lineTo(cx+Math.cos(hh)*r*.45,cy+Math.sin(hh)*r*.45); c.stroke();
+    for(const m of bgx){ m.y-=m.v; if(m.y<-5){ m.y=H+5; m.x=Math.random()*W; } c.fillStyle=`rgba(255,215,150,${.15+.2*Math.sin(ts/1200+m.t)})`; c.beginPath(); c.arc(m.x+Math.sin(ts/2000+m.t)*8*d,m.y,m.r,0,7); c.fill(); }
+  } else if(themeKey==="steampunk"){
+    for(const g of bgx){ c.fillStyle="rgba(190,120,60,.10)"; c.strokeStyle="rgba(220,160,90,.18)"; c.lineWidth=2*d;
+      gear(c,g.x,g.y,g.r,g.n,ts/6000*g.s); c.fill("evenodd"); c.stroke(); }
+    for(let i=0;i<18;i++){ const p=((ts/40+i*97)%(H+40)); c.fillStyle=`rgba(255,150,60,${.5*(1-p/H)})`; c.fillRect((i*137%W),H-p,2*d,2*d); }
+  } else if(themeKey==="scifi"){
+    for(const p of bgx){ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1; }
+    const lim=130*d; c.lineWidth=1*d;
+    for(let i=0;i<bgx.length;i++) for(let j=i+1;j<bgx.length;j++){ const a=bgx[i], b=bgx[j], dd=Math.hypot(a.x-b.x,a.y-b.y);
+      if(dd<lim){ c.strokeStyle=`rgba(110,243,255,${.22*(1-dd/lim)})`; c.beginPath(); c.moveTo(a.x,a.y); c.lineTo(b.x,b.y); c.stroke(); } }
+    for(const p of bgx){ c.fillStyle="rgba(170,140,255,.7)"; c.beginPath(); c.arc(p.x,p.y,1.6*d,0,7); c.fill(); }
+    const sy=(ts/12)%H; const g=c.createLinearGradient(0,sy-40*d,0,sy); g.addColorStop(0,"rgba(110,243,255,0)"); g.addColorStop(1,"rgba(110,243,255,.08)"); c.fillStyle=g; c.fillRect(0,sy-40*d,W,40*d);
+  } else if(themeKey==="arcane"){
+    const cx=W*.5, cy=H*.42, r=Math.min(W,H)*.4, rot=ts/30000;
+    c.strokeStyle="rgba(232,193,90,.10)"; c.lineWidth=2*d; c.beginPath(); c.arc(cx,cy,r,0,7); c.stroke(); c.beginPath(); c.arc(cx,cy,r*.8,0,7); c.stroke();
+    c.beginPath(); for(let i=0;i<=5;i++){ const a=rot+i*Math.PI*4/5-Math.PI/2; const px=cx+Math.cos(a)*r*.8, py=cy+Math.sin(a)*r*.8; i?c.lineTo(px,py):c.moveTo(px,py); } c.stroke();
+    c.font=`${16*d}px serif`; c.fillStyle="rgba(232,193,90,.16)"; c.textAlign="center"; c.textBaseline="middle";
+    for(let i=0;i<24;i++){ const a=-rot*2+i/24*Math.PI*2; c.fillText(RUNES[i%RUNES.length],cx+Math.cos(a)*r*.9,cy+Math.sin(a)*r*.9); }
+    for(const s of bgx){ if(s.rune){ s.y-=s.v; if(s.y<-20){ s.y=H+20; s.x=Math.random()*W; } c.font=`${22*d}px serif`; c.fillStyle=`rgba(200,170,255,${.18+.15*Math.sin(ts/900+s.t)})`; c.fillText(s.rune,s.x,s.y); }
+      else { c.fillStyle=`rgba(${s.c},${.3+.4*Math.sin(ts/700+s.t)})`; c.beginPath(); c.arc(s.x,s.y,s.r,0,7); c.fill(); } }
+  }
+}
+/* warp particles per theme */
+const WARP={
+  brick:{cols:["#d6202a","#ffc928","#1d6fd6","#1f9d4a","#ff7a1a","#ffffff"],hues:[185,320]},
+  vintage:{cols:["#e8c88a","#c89a4a","#f4e6c4","#a8743a"],hues:[38,28]},
+  steampunk:{cols:["#c8873a","#e0b060","#9a5a2a","#d8a070"],hues:[28,40]},
+  scifi:{cols:["#6ef3ff","#a98bff","#ffffff","#5affc8"],hues:[185,265]},
+  arcane:{cols:["#ffd76a","#c89bff","#ff9be8","#ffffff"],hues:[275,45]},
+};
+function warpParticle(x,b,w,h){
+  const t=themeKey;
+  if(t==="vintage"){ const r=w*.5; x.strokeStyle=b.c; x.lineWidth=Math.max(1,r*.12); x.beginPath(); x.arc(0,0,r,0,7); x.stroke();
+    x.beginPath(); x.moveTo(0,0); x.lineTo(0,-r*.75); x.moveTo(0,0); x.lineTo(r*.5,0); x.stroke(); return; }
+  if(t==="steampunk"){ x.fillStyle=b.c; gear(x,0,0,w*.5,8,0); x.fill("evenodd"); return; }
+  if(t==="scifi"){ const r=w*.45; x.strokeStyle=b.c; x.lineWidth=Math.max(1,r*.15); x.beginPath(); for(let i=0;i<=6;i++){ const a=i*Math.PI/3; i?x.lineTo(Math.cos(a)*r,Math.sin(a)*r):x.moveTo(r,0); } x.stroke(); return; }
+  if(t==="arcane"){ if(b.rune){ x.fillStyle=b.c; x.font=`${Math.max(8,w*.9)}px serif`; x.textAlign="center"; x.textBaseline="middle"; x.fillText(b.rune,0,0); return; }
+    const r=w*.5; x.fillStyle=b.c; x.beginPath(); for(let i=0;i<10;i++){ const a=i*Math.PI/5-Math.PI/2, rr=i%2?r*.42:r; x.lineTo(Math.cos(a)*rr,Math.sin(a)*rr); } x.fill(); return; }
+  x.fillStyle=b.c; x.fillRect(-w/2,-h/2,w,h);
+  x.fillRect(-w/2+w*.12,-h/2-h*.28,w*.28,h*.3); x.fillRect(w/2-w*.4,-h/2-h*.28,w*.28,h*.3);
+  x.fillStyle="rgba(0,0,0,.25)"; x.fillRect(-w/2,h/2-h*.2,w,h*.2);
+}
+
+sizeStars(); requestAnimationFrame(drawStars);
 
 /* ---------- 7-segment display ---------- */
 const SEG={a:[10,2,30,7],b:[41,10,7,32],c:[41,48,7,32],d:[10,81,30,7],e:[2,48,7,32],f:[2,10,7,32],g:[10,41.5,30,7]};
@@ -932,42 +1339,57 @@ function segDigit(n){ const on=DIG[n]; return `<svg viewBox="0 0 50 90" aria-hid
 /* ---------- console ---------- */
 function yearsWithMemories(){ const m={}; for(const x of state.memories){ const y=+x.date.slice(0,4); m[y]=(m[y]||0)+1; } return m; }
 function renderTitle(){ const n=state.config.name; $("#title").textContent=n?`${possessive(n)} TIME MACHINE`:"TIME MACHINE"; document.title=n?`${n}'s Time Machine`:"Time Machine"; }
+const SPLIT=750;   // Eli's era gets 3/4 of the slider, the far future the last 1/4
+function yToPos(y){ return y<=THIS_YEAR ? (y-MIN_YEAR)/(THIS_YEAR-MIN_YEAR)*SPLIT : SPLIT+(y-THIS_YEAR)/(MAX_YEAR-THIS_YEAR)*(1000-SPLIT); }
+function posToY(p){ return Math.round(p<=SPLIT ? MIN_YEAR+p/SPLIT*(THIS_YEAR-MIN_YEAR) : THIS_YEAR+(p-SPLIT)/(1000-SPLIT)*(MAX_YEAR-THIS_YEAR)); }
 function renderConsole(){
-  const lo=MIN_YEAR, hi=THIS_YEAR, by=birthYear();
+  const lo=MIN_YEAR, hi=MAX_YEAR, by=birthYear();
   state.year=Math.min(hi,Math.max(lo,state.year));
-  const sl=$("#slider"); sl.min=lo; sl.max=hi; sl.value=state.year;
+  const sl=$("#slider"); sl.min=0; sl.max=1000; sl.step=1; sl.value=yToPos(state.year);
   $("#digits").innerHTML=String(state.year).split("").map(d=>segDigit(+d)).join("");
   $("#digits").setAttribute("aria-label",state.year);
   let age="";
-  if(by){ const a=state.year-by; age = a<0 ? `${-a} year${a<-1?"s":""} before he was born` : a===0 ? "⭐ The year he was born ⭐" : `He turns ${a} this year`; }
+  if(by){ const a=state.year-by;
+    if(state.year>THIS_YEAR) age = a<=110 ? `🔮 The future · he'll be ${a}` : `🔮 The future · ${a.toLocaleString()} years after he was born`;
+    else age = a<0 ? `${-a} year${a<-1?"s":""} before he was born` : a===0 ? "⭐ The year he was born ⭐" : `He turns ${a} this year`; }
+  else if(state.year>THIS_YEAR) age="🔮 The future";
   $("#age").textContent=age;
-  const has=yearsWithMemories(), span=hi-lo;
+  const has=yearsWithMemories();
   let html="";
-  for(let y=lo;y<=hi;y++){
+  for(let y=lo;y<=THIS_YEAR;y++){
     const decade=y%10===0, isBorn=y===by;
-    if(!decade && !has[y] && !isBorn && y!==hi) continue;
+    if(!decade && !has[y] && !isBorn && y!==THIS_YEAR) continue;
     const label = decade ? `'${String(y).slice(2)}` : isBorn ? "★" : "";
-    html+=`<div class="tick ${has[y]?"has":""} ${isBorn?"born":""}" style="left:${(y-lo)/span*100}%"><i></i>${label}</div>`;
+    html+=`<div class="tick ${has[y]?"has":""} ${isBorn?"born":""}" style="left:${yToPos(y)/10}%"><i></i>${label}</div>`;
   }
+  for(const y of [2100,2500,3000]) html+=`<div class="tick future y${y}" style="left:${yToPos(y)/10}%"><i></i>${y}</div>`;
   $("#ticks").innerHTML=html;
 }
 function setYear(y){ state.year=y; renderConsole(); beep(); }
-$("#slider").addEventListener("input",e=>{ state.year=+e.target.value; renderConsole(); });
+$("#slider").addEventListener("input",e=>{ state.year=posToY(+e.target.value); renderConsole(); });
 $("#minus").onclick=()=>setYear(state.year-1);
 $("#plus").onclick=()=>setYear(state.year+1);
 $("#engage").onclick=()=>travel(state.year);
-$("#random").onclick=()=>{
+// ⭐ My Jump: a random year that has his memories
+$("#myJump").onclick=()=>{
   const ys=Object.keys(yearsWithMemories()).map(Number);
-  if(!ys.length){ toast("No memories saved yet. Tap + to add one!"); return; }
+  if(!ys.length){ toast("No memories saved yet. Try 🎲 Surprise!"); return; }
   let y=ys[Math.floor(Math.random()*ys.length)];
   if(ys.length>1) while(y===state.arrivedYear) y=ys[Math.floor(Math.random()*ys.length)];
+  state.year=y; renderConsole(); travel(y);
+};
+// 🎲 Surprise: a random year with NO family memories, half the time in the past, half in the future
+$("#random").onclick=()=>{
+  const has=yearsWithMemories(); let y, tries=0;
+  do{ y = Math.random()<.5 ? MIN_YEAR+Math.floor(Math.random()*(THIS_YEAR-MIN_YEAR+1)) : THIS_YEAR+1+Math.floor(Math.random()*(MAX_YEAR-THIS_YEAR)); }
+  while((has[y] || y===state.arrivedYear) && ++tries<200);
   state.year=y; renderConsole(); travel(y);
 };
 // hold-to-scroll on arrow buttons
 for(const [id,d] of [["#minus",-1],["#plus",1]]){
   let t=null; const b=$(id);
   const stop=()=>{ clearTimeout(t); clearInterval(t); t=null; };
-  b.addEventListener("pointerdown",()=>{ t=setTimeout(()=>{ t=setInterval(()=>{ state.year+=d; renderConsole(); },90); },450); });
+  b.addEventListener("pointerdown",()=>{ let n=0; t=setTimeout(()=>{ t=setInterval(()=>{ n++; state.year+=d*(n<25?1:n<50?5:25); renderConsole(); },90); },450); });
   ["pointerup","pointerleave","pointercancel"].forEach(ev=>b.addEventListener(ev,stop));
 }
 
@@ -1006,7 +1428,11 @@ const VOICE_FX={ robot:"robot", captain:"captain", giant:"giant", alien:"alien",
 const SPICE={ pirate:t=>"Arr! "+t.replace(/\byou\b/gi,"ye").replace(/\byour\b/gi,"yer")+" Arr!", robot:t=>"Beep boop. "+t, alien:t=>"Greetings, earthling. "+t };
 // pitch & speed sliders are multipliers on top of the chosen character (1 = as designed)
 let vOverride=null;
-function curStyle(){ return (vOverride&&vOverride.style)||state.config.style||"robot"; }
+function curStyle(){
+  if(vOverride&&vOverride.style) return vOverride.style;
+  // the engine's brass voice lever: up = robot, middle = the chosen narrator, down = a secret surprise voice
+  if(typeof Engine!=="undefined" && Engine.state==="connected"){ if(Engine.lever===0) return "robot"; if(Engine.lever===2 && secretStyle) return secretStyle; }
+  return state.config.style||"robot"; }
 function voiceSettings(){ const c=vOverride||state.config; return { pitch: typeof c.pitch==="number"?c.pitch:1, rate: typeof c.rate==="number"?c.rate:1 }; }
 let voices=[];
 function loadVoices(){ try{ const local=speechSynthesis.getVoices().filter(v=>v.localService); voices=local.filter(v=>/^en/i.test(v.lang)).concat(local.filter(v=>!/^en/i.test(v.lang))); }catch(e){ voices=[]; } fillVoiceSelect(); }
@@ -1185,7 +1611,7 @@ function playSting(style){
 
 
 function stopAll(){ speakToken++; try{ speechSynthesis.cancel(); }catch(e){} if(currentAudio){ currentAudio.pause(); currentAudio=null; } if(currentFx) currentFx(); }
-async function runQueue(steps, onStep){ Music.duck(true); try{ return await _runQueue(steps,onStep); } finally{ Music.duck(false); } }
+async function runQueue(steps, onStep){ Music.duck(true); Engine.send("T:1"); try{ return await _runQueue(steps,onStep); } finally{ Music.duck(false); Engine.send("T:0"); } }
 async function _runQueue(steps, onStep){
   stopAll(); const my=++speakToken; let stung=false;
   for(let i=0;i<steps.length;i++){
@@ -1210,17 +1636,19 @@ let traveling=false;
 const pbar=$("#pbar"); pbar.innerHTML=Array.from({length:20},(_,i)=>`<i style="--c:${["var(--green)","var(--yellow)","var(--orange)","var(--red)"][Math.floor(i/5)]}"></i>`).join("");
 function travel(target){
   Music.duck(true); setTimeout(()=>Music.duck(false),3200);
-  if(traveling) return; traveling=true; stopAll();
+  if(traveling) return; traveling=true; stopAll(); warpAbort=false;
+  if(Engine.lever===2) secretStyle=SECRET_STYLES[Math.floor(Math.random()*SECRET_STYLES.length)];
+  Engine.send("W:1");
   const from=state.arrivedYear ?? THIS_YEAR;
   const W=$("#warp"), c=$("#warpc"), x=c.getContext("2d"), yEl=$("#warpYear"), cells=[...pbar.children];
   const dpr=devicePixelRatio; c.width=innerWidth*dpr; c.height=innerHeight*dpr;
   const cx=c.width/2, cy=c.height/2;
-  const cols=["#d6202a","#ffc928","#1d6fd6","#1f9d4a","#ff7a1a","#ffffff"];
-  const bricks=Array.from({length:110},()=>({x:(Math.random()-.5)*2,y:(Math.random()-.5)*2,z:Math.random()*4+.5,c:cols[Math.floor(Math.random()*cols.length)],r:Math.random()*6}));
-  const streaks=Array.from({length:260},()=>({a:Math.random()*Math.PI*2,d:Math.random()*60,z:Math.random()*.6+.4,h:Math.random()<.5?185:320}));
+  const WP=WARP[themeKey]||WARP.brick, cols=WP.cols;
+  const bricks=Array.from({length:110},()=>({x:(Math.random()-.5)*2,y:(Math.random()-.5)*2,z:Math.random()*4+.5,c:cols[Math.floor(Math.random()*cols.length)],r:Math.random()*6,rune:themeKey==="arcane"&&Math.random()<.4?RUNES[Math.floor(Math.random()*RUNES.length)]:null}));
+  const streaks=Array.from({length:260},()=>({a:Math.random()*Math.PI*2,d:Math.random()*60,z:Math.random()*.6+.4,h:WP.hues[Math.random()<.5?0:1]}));
   const DUR=2600, reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   W.classList.add("on"); warpSound(DUR/1000);
-  if(state.sound) speak(`Destination, ${target}. Engage!`);
+  if(state.sound) speak(`Destination, ${target}. ${THEMES[themeKey].go}`);
   const t0=performance.now();
   function frame(now){
     const p=Math.min(1,(now-t0)/DUR), sp=Math.pow(p,2);
@@ -1231,26 +1659,35 @@ function travel(target){
     for(const b of bricks){ b.z-= (0.01+sp*.12)*(reduce?0:1); b.r+=.03; if(b.z<.05){ b.z=4.5; b.x=(Math.random()-.5)*2; b.y=(Math.random()-.5)*2; }
       const s=1/b.z, px=cx+b.x*cx*s, py=cy+b.y*cy*s, w=26*s*dpr, h=16*s*dpr;
       x.save(); x.translate(px,py); x.rotate(b.r); x.globalAlpha=Math.min(1,(4.5-b.z)/2);
-      x.fillStyle=b.c; x.fillRect(-w/2,-h/2,w,h);
-      x.fillRect(-w/2+w*.12,-h/2-h*.28,w*.28,h*.3); x.fillRect(w/2-w*.4,-h/2-h*.28,w*.28,h*.3);
-      x.fillStyle="rgba(0,0,0,.25)"; x.fillRect(-w/2,h/2-h*.2,w,h*.2); x.restore(); }
+      warpParticle(x,b,w,h); x.restore(); }
     x.globalAlpha=1;
     const ease=1-Math.pow(1-p,3); yEl.textContent=Math.round(from+(target-from)*ease);
     const lit=Math.round(p*cells.length); cells.forEach((el,i)=>el.classList.toggle("lit",i<lit));
+    if(warpAbort){ warpAbort=false; abortWarp(W,from); return; }
     if(p<1) requestAnimationFrame(frame);
     else{
       const F=$("#flash"); F.style.transition="none"; F.style.opacity=1;
-      requestAnimationFrame(()=>{ W.classList.remove("on"); state.arrivedYear=target; renderArrival(); announceArrival(target);
+      requestAnimationFrame(()=>{ W.classList.remove("on"); state.arrivedYear=target; renderArrival(); announceArrival(target); Engine.send("W:0");
         F.style.transition="opacity .9s"; F.style.opacity=0; traveling=false; });
     }
   }
   requestAnimationFrame(frame);
 }
+// ABORT pressed mid-jump: red flash, sputter, stay where we were
+function abortWarp(W,from){
+  stopAll(); sputter(1.4);
+  const F=$("#flash"); F.style.transition="none"; F.style.background="#d6202a"; F.style.opacity=.85;
+  requestAnimationFrame(()=>{ W.classList.remove("on"); F.style.transition="opacity 1.2s"; F.style.opacity=0;
+    setTimeout(()=>{ F.style.background=""; },1300); traveling=false; state.year=state.arrivedYear ?? from; renderConsole();
+    toast("⚠️ Jump aborted!"); if(state.sound) setTimeout(()=>runQueue([{tts:"Jump aborted. Temporal engine stalled."}]),700); });
+}
 function announceArrival(y){
   if(!state.sound) return;
   const n=state.memories.filter(m=>+m.date.slice(0,4)===y).length, by=birthYear();
   let who=""; if(by){ const a=y-by; who = a<0?`This is ${-a} years before you were born.` : a===0?"This is the year you were born!" : `This is the year you turned ${a}.`; }
-  const found = n ? `${n} memor${n>1?"ies":"y"} detected.` : "No memories detected here yet.";
+  if(by && y>THIS_YEAR) who = y-by<=110 ? `In this year you will be ${y-by}.` : "";
+  const era=eraOf(y);
+  const found = n ? `${n} memor${n>1?"ies":"y"} detected.` : y>THIS_YEAR ? `This is the future. Nobody knows what it holds yet, but welcome to ${era.name}. ${era.blurb}` : `No family memories here yet, but this is ${era.name}. ${era.blurb}`;
   runQueue([{tts:`Time jump complete. Welcome to ${y}. ${who} ${found}`}]);
 }
 
@@ -1263,35 +1700,66 @@ function renderArrival(){
   }
   if(y==null){
     const n=state.memories.length;
-    el.innerHTML=`<div class="empty"><div class="big">🚀</div><h2>Pick a year and hit ENGAGE</h2>${n?`${n} memor${n>1?"ies":"y"} saved across time, from ${MIN_YEAR} to today.`:"No memories yet. Tap the yellow + brick to add the first one."}
+    el.innerHTML=`<div class="empty"><div class="big">🚀</div><h2>Pick a year and hit ENGAGE</h2>${n?`${n} memor${n>1?"ies":"y"} saved across time. The machine reaches from ${MIN_YEAR} all the way to ${MAX_YEAR}.`:"No memories yet. Tap the yellow + brick to add the first one."}
       <div class="btns"><button class="btn brick b-orange press" id="goToday">📅 What happened on this day?</button></div></div>`;
     $("#goToday").onclick=openToday; return;
   }
   const list=state.memories.filter(m=>+m.date.slice(0,4)===y).sort((a,b)=>a.date.localeCompare(b.date));
-  if(!list.length){
-    const ys=Object.keys(yearsWithMemories()).map(Number).sort((a,b)=>a-b);
-    const before=ys.filter(v=>v<y).pop(), after=ys.find(v=>v>y);
-    el.innerHTML=`<div class="arr-head"><div class="when">YOU HAVE ARRIVED IN ${y}</div></div>
-      <div class="empty"><div class="big">🌫️</div>The time fog is thick here. No memories recorded in ${y} yet.
-      <div class="btns">${before?`<button class="btn brick b-blue press" data-jump="${before}">◀ Jump to ${before}</button>`:""}
-      ${after?`<button class="btn brick b-blue press" data-jump="${after}">Jump to ${after} ▶</button>`:""}
-      <button class="btn brick b-yellow press edit-only" id="addHere">+ Add a memory from ${y}</button></div></div>`;
-    el.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>{ state.year=+b.dataset.jump; renderConsole(); travel(state.year); });
-    $("#addHere").onclick=()=>openMemForm(null,`${y}-${pad(NOW.getMonth()+1)}-01`);
-    return;
-  }
+  if(!list.length){ renderEraYear(el,y); return; }
   document.body.classList.add("arrived");
   const by=birthYear(), a=by?y-by:null;
   const nm=state.config.name||"you"; const sub = a==null?"" : a<0?`${-a} year${a<-1?"s":""} before ${esc(nm)} ${nm==="you"?"were":"was"} born` : a===0?`The year ${esc(nm)} ${nm==="you"?"were":"was"} born` : `The year ${esc(nm)} turned ${a}`;
   el.innerHTML=`<div class="arr-bar">
       <button class="brick b-gray press" id="backBtn">⏪ New jump</button>
       <div class="sp-year">${y}</div>
-      <button class="brick b-blue press" id="arrRandom">🎲 Surprise</button></div>
+      <span class="arr-jumps"><button class="brick b-green press" id="arrMine">⭐ My Jump</button><button class="brick b-blue press" id="arrRandom">🎲 Surprise</button></span></div>
     <div class="sp-sub">${sub} · ${list.length} memor${list.length>1?"ies":"y"} · tap one to open it</div>
     <div class="space">${list.map(tileHTML).join("")}</div>`;
   $("#backBtn").onclick=()=>{ stopAll(); document.body.classList.remove("arrived"); el.innerHTML=""; };
-  $("#arrRandom").onclick=()=>$("#random").click();
+  $("#arrRandom").onclick=()=>$("#random").click(); $("#arrMine").onclick=()=>$("#myJump").click();
   el.querySelectorAll("[data-tile]").forEach(t=>t.onclick=()=>openViewer(list,+t.dataset.tile));
+}
+function renderEraYear(el,y){
+  const ys=Object.keys(yearsWithMemories()).map(Number).sort((a,b)=>a-b);
+  const before=ys.filter(v=>v<y).pop(), after=ys.find(v=>v>y), era=eraOf(y), facts=yearFacts(y), by=birthYear(), nm=state.config.name||"";
+  const a=by?y-by:null, fut=y>THIS_YEAR;
+  let sub = fut ? (a!=null && a<=110 ? `The future · ${esc(nm||"you")} will be ${a}` : "The future · nobody has been here yet") :
+    a==null ? "" : a<0 ? `${-a} year${a<-1?"s":""} before ${esc(nm||"you")} ${nm?"was":"were"} born` : a===0 ? `The year ${esc(nm||"you")} ${nm?"was":"were"} born` : `The year ${esc(nm||"you")} turned ${a}`;
+  sub += fut ? " · tap a card to hear it" : ` · no family memories yet · tap a card to hear it`;
+  document.body.classList.add("arrived");
+  el.innerHTML=`<div class="arr-bar">
+      <button class="brick b-gray press" id="backBtn">⏪ New jump</button>
+      <div class="sp-year">${y}</div>
+      <span class="arr-jumps"><button class="brick b-green press" id="arrMine">⭐ My Jump</button><button class="brick b-blue press" id="arrRandom">🎲 Surprise</button></span></div>
+    <div class="era-hero">${eraScene(y)}<div class="era-name">${era.emoji} ${esc(era.name.replace(/^the /,"The "))}</div>${fut?`<div class="fut">🔮 Future guesses</div>`:""}</div>
+    <div class="sp-sub">${sub}</div>
+    <div class="era-btns">${before?`<button class="btn brick b-blue press" data-jump="${before}">◀ Memories in ${before}</button>`:""}
+      ${after?`<button class="btn brick b-blue press" data-jump="${after}">Memories in ${after} ▶</button>`:""}
+      ${!fut?`<button class="btn brick b-yellow press edit-only" id="addHere">+ Add a memory from ${y}</button>`:""}</div>
+    <div class="space facts">${facts.map((f,i)=>`<button class="tile fact brick ${["b-blue","b-green","b-orange","b-red","b-yellow"][i%5]} ${f[3]===y?"now":""}" data-fact="${i}" style="--d:${i*110}ms;--f:${(i%4)*0.7}s">
+      <div class="tthumb">${factPhoto(f[5])?`<img src="${urlFor(factPhoto(f[5]))}" alt=""><span class="tbadge mic" data-zoom="${i}">🔍</span>`:f[0]}${f[3]===y?`<span class="tbadge">★ ${y}</span>`:""}
+        <span class="fact-cam edit-only" data-cam="${i}" role="button" aria-label="Add a photo to this card">📷${factPhoto(f[5])?"":" Add photo"}</span>${factPhoto(f[5])?`<span class="fact-cam del edit-only" data-del="${i}" role="button" aria-label="Remove this photo">🗑</span>`:""}</div>
+      <div class="tinfo"><b>${esc(f[1])}</b><p>${esc(f[2])}</p></div></button>`).join("")}</div>`;
+  $("#backBtn").onclick=()=>{ stopAll(); document.body.classList.remove("arrived"); el.innerHTML=""; };
+  $("#arrRandom").onclick=()=>$("#random").click(); $("#arrMine").onclick=()=>$("#myJump").click();
+  el.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>{ state.year=+b.dataset.jump; renderConsole(); travel(state.year); });
+  const ah=$("#addHere"); if(ah) ah.onclick=()=>openMemForm(null,`${y}-${pad(NOW.getMonth()+1)}-01`);
+  el.querySelectorAll("[data-fact]").forEach(t=>t.onclick=async(ev)=>{
+    const f0=facts[+t.dataset.fact], tgt=ev.target;
+    if(tgt.closest("[data-cam]")){ ev.stopPropagation(); pickFactPhoto(f0[5],()=>renderEraYear(el,y)); return; }
+    if(tgt.closest("[data-del]")){ ev.stopPropagation(); confirmBox("Remove this photo?","The card goes back to its picture icon. The fact stays.","Remove",async()=>{ await setFactPhoto(f0[5],null); renderEraYear(el,y); }); return; }
+    if(tgt.closest("[data-zoom]")){ ev.stopPropagation(); const im=t.querySelector(".tthumb img"); if(im) openLightbox(im); return; }
+    const on=t.classList.contains("speaking"); stopAll(); el.querySelectorAll(".speaking").forEach(x=>x.classList.remove("speaking"));
+    if(on) return; const f=facts[+t.dataset.fact]; t.classList.add("speaking");
+    const ok=await runQueue([{tts:`${f[1]}. ${f[2]}`}]); if(ok) t.classList.remove("speaking"); });
+}
+/* photos Dad adds to fact cards (kept on this device, and in the backup) */
+function factPhoto(id){ return id && state.factPhotos[id] || null; }
+async function setFactPhoto(id,blob){ if(blob) state.factPhotos[id]=blob; else delete state.factPhotos[id]; await store.setKV("factPhotos",state.factPhotos); markDirty(); }
+function pickFactPhoto(id,done){
+  const inp=$("#factFile"); inp.value="";
+  inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; try{ const b=await shrink(f,1600); await setFactPhoto(id,b); toast("Photo added ✔"); done&&done(); }catch(e){ toast("Couldn't use that picture"); } };
+  inp.click();
 }
 function tileHTML(m,i){
   const img=(m.media||[]).find(x=>x.type==="image"), vid=(m.media||[]).find(x=>x.type==="video");
@@ -1469,6 +1937,7 @@ function openSettings(){
   $("#sPin").value=""; $("#sPin2").value="";
   $("#sPinNote").textContent = c.pinHash ? "A PIN is set. Leave these blank to keep it, or type a new one to change it." : "Set a PIN so only grown-ups can add or change memories and setup. Write it down somewhere safe.";
   $("#sGFx").innerHTML=fxOptions(c.greetFx||"normal");
+  $("#sTheme").innerHTML=Object.entries(THEMES).map(([k,t])=>`<option value="${k}">${t.name}</option>`).join(""); $("#sTheme").value=themeKey;
   pendingGreeting=c.greeting||null; setRec=recorder($("#sRec"),()=>pendingGreeting,b=>pendingGreeting=b);
   $("#setModal").classList.add("on");
 }
@@ -1478,7 +1947,8 @@ function showVoiceWrap(){ $("#sVoiceWrap").hidden = IS_APP ? $("#sEngine").value
 $("#sEngine").addEventListener("change",()=>{ fillVoiceSelect(); showVoiceWrap(); });
 $("#sStyle").addEventListener("change",()=>{ $("#sPitch").value=1; $("#sRate").value=1; showVS(); showVoiceWrap(); });
 ["#sPitch","#sRate"].forEach(id=>$(id).addEventListener("input",()=>{ showVS(); }));
-function closeSettings(){ setRec&&setRec.stop(); $("#setModal").classList.remove("on"); }
+function closeSettings(){ setRec&&setRec.stop(); $("#setModal").classList.remove("on"); applyTheme(state.config.theme||"brick"); }
+$("#sTheme").addEventListener("change",e=>applyTheme(e.target.value));
 $("#setBtn").onclick=openSettings; $("#sCancel").onclick=closeSettings;
 $("#sTest").onclick=async()=>{
   vOverride={style:$("#sStyle").value, engine:$("#sEngine").value, voiceURI:IS_APP?state.config.voiceURI:$("#sVoice").value, nativeVoice:IS_APP?$("#sVoice").value:state.config.nativeVoice, pitch:+$("#sPitch").value, rate:+$("#sRate").value};
@@ -1496,7 +1966,7 @@ $("#setForm").addEventListener("submit",async e=>{
     pinHash=await hashPin(p1);
   }
   state.config={ ...state.config, name:$("#sName").value.trim(), birthday:$("#sBirth").value, me:$("#sMe").value.trim(),
-    style:$("#sStyle").value, engine:$("#sEngine").value, voiceURI:IS_APP?state.config.voiceURI:$("#sVoice").value, nativeVoice:IS_APP?$("#sVoice").value:state.config.nativeVoice, pitch:+$("#sPitch").value, rate:+$("#sRate").value, greeting:pendingGreeting, greetFx:$("#sGFx").value, pinHash };
+    style:$("#sStyle").value, engine:$("#sEngine").value, voiceURI:IS_APP?state.config.voiceURI:$("#sVoice").value, nativeVoice:IS_APP?$("#sVoice").value:state.config.nativeVoice, pitch:+$("#sPitch").value, rate:+$("#sRate").value, greeting:pendingGreeting, greetFx:$("#sGFx").value, pinHash, theme:$("#sTheme").value };
   try{ await store.setKV("config",state.config); }catch(err){ toast("Couldn't save setup"); }
   const newPin=pinHash!==keepPin; if(newPin){ unlocked=true; bumpLockTimer(); }
   closeSettings(); renderAll(); applyLock(); toast(newPin?"Saved. PIN set: tap 🔓 Lock when you're done editing.":"Setup saved");
@@ -1527,6 +1997,8 @@ function backupFiles(){
     if(m.voiceNote){ const p=`${base}/narration.${extFor(m.voiceNote)}`; files.push({path:p,blob:m.voiceNote}); rec.voiceNote=p; rec.voiceMime=m.voiceNote.type||""; }
     meta.memories.push(rec);
   }
+  meta.factPhotos={};
+  for(const [id,b] of Object.entries(state.factPhotos||{})){ if(!b) continue; const p=`era-photos/${safeName(id)}.${extFor(b)}`; files.push({path:p,blob:b}); meta.factPhotos[id]={file:p,mime:b.type||""}; }
   const readme=`TIME MACHINE BACKUP\nMade ${new Date().toLocaleString()}\n${state.memories.length} memories.\n\nThe "memories" folder has every photo, video and voice recording, one folder per memory, named by date and title.\nmemories.json holds the titles, stories and settings.\nTo bring everything back, open the time machine, unlock with the PIN, open setup and choose "Restore from backup".\n`;
   files.unshift({path:"memories.json",blob:new Blob([JSON.stringify(meta,null,1)],{type:"application/json"})},{path:"README.txt",blob:new Blob([readme],{type:"text/plain"})});
   return {files,count:state.memories.length};
@@ -1629,11 +2101,13 @@ async function restoreFile(src){
         if(++i%5===0) toast(`Restoring… ${Math.round(i/meta.memories.length*100)}%`);
       }
     }
+    const fps={};
+    if(kind==="zip") for(const [id,x] of Object.entries(meta.factPhotos||{})){ const b=await zip.blob(x.file,x.mime); if(b) fps[id]=b; }
     delete cfg.greetingMime;
     // voice choices belong to each device (the tablet's voices differ from the computer's), so keep this device's
     for(const k of ["engine","nativeVoice","voiceURI"]) if(state.config[k]!==undefined) cfg[k]=state.config[k];
-    await store.clearMemories(); for(const m of mems) await store.putMemory(m); await store.setKV("config",cfg);
-    state.config=cfg; state.memories=mems; state.arrivedYear=null; unlocked=false; closeSettings(); renderAll(); applyLock(); musicSync();
+    await store.clearMemories(); for(const m of mems) await store.putMemory(m); await store.setKV("config",cfg); await store.setKV("factPhotos",fps);
+    state.config=cfg; state.memories=mems; state.factPhotos=fps; state.arrivedYear=null; unlocked=false; closeSettings(); renderAll(); applyLock(); musicSync();
     await store.setKV("dirty",false); state.dirty=false; updateBackupInfo();
     toast(`Restored ${mems.length} memories`);
   });
@@ -1669,6 +2143,8 @@ window.tmNative=msg=>{
   else if(msg.type==="restorePicked"){ restoreFile(appReader(msg.name,msg.size)); }
   else if(msg.type==="tts"){ const cb=ttsWait[msg.id]; if(cb){ delete ttsWait[msg.id]; cb(msg); } }
   else if(msg.type==="toast"){ toast(msg.message); }
+  else if(msg.type==="engine"){ engineLine(String(msg.line||"").trim()); }
+  else if(msg.type==="engineState"){ Engine.state=msg.state; updateEngineBadge(); if(msg.state==="connected"){ Engine.send("HELLO"); toast("⚙️ Temporal Engine linked"); } }
 };
 // Android back button: close whatever is open, top-most first
 window.tmBack=()=>{
@@ -1864,6 +2340,75 @@ $("#musicBtn").onclick=()=>{ state.music=!state.music; store.setKV("music",state
 // browsers only allow sound after a tap, so a saved "music on" starts at the first touch
 document.addEventListener("pointerdown",()=>{ if(state.music){ ac(); musicSync(); } },{capture:true});
 
+/* ---------- TEMPORAL ENGINE: the physical brass console, linked over Bluetooth (Android app only) ----------
+   Engine -> app:  Y:1999 year on the drums · P:0-100 pressure · L:1999 knife switch thrown (fully charged)
+                   F fizzle (not enough charge) · A abort button · V valve vented · S:0/1/2 voice lever · K:1/0 knife
+   App -> engine:  HELLO · W:1 warp started · W:0 arrived · N launch refused · T:1/T:0 narrator talking        */
+const Engine={ state:"off", lever:1, pressure:0, year:null,
+  send(line){ if(IS_APP && this.state==="connected" && TMApp.engineSend) try{ TMApp.engineSend(line); }catch(e){} } };
+let warpAbort=false, secretStyle=null;
+const SECRET_STYLES=["giant","chipmunk","alien","pirate","wizard","scientist","announcer","sleepy","captain","robot"];
+function engineEnabled(on){
+  if(!IS_APP || !TMApp.engineStart) return;
+  if(on) TMApp.engineStart(); else { TMApp.engineStop(); Engine.state="off"; updateEngineBadge(); }
+}
+function updateEngineBadge(){
+  const b=$("#engineBadge"); if(!b) return;
+  const st=Engine.state;
+  b.hidden = st==="off";
+  const words={searching:"Looking for the engine…",connecting:"Connecting to the engine…",connected:"Engine linked",asking:"Allow “Nearby devices” to link the engine",
+    noperm:"Bluetooth permission was refused",btoff:"Turn on Bluetooth to link the engine",nobluetooth:"This device has no Bluetooth"};
+  b.textContent = (st==="connected"?"⚙️ ":"🔌 ")+(words[st]||st)+(st==="connected"?` · ⚡ ${Engine.pressure}%`:"");
+  b.classList.toggle("ok",st==="connected");
+  const s=$("#sEngineState"); if(s) s.textContent=words[st]||(st==="off"?"Not linked":st);
+}
+function anyModalOpen(){ return ["#pinModal","#memModal","#setModal","#confirmModal"].some(id=>$(id).classList.contains("on")); }
+function engineLine(line){
+  const i=line.indexOf(":"), k=i<0?line:line.slice(0,i), v=i<0?"":line.slice(i+1);
+  if(k==="Y"){ const y=parseInt(v,10); if(isNaN(y)) return; Engine.year=y;
+    if(y<MIN_YEAR||y>MAX_YEAR){ $("#age").textContent=`⚠️ ${y} is outside the time machine (${MIN_YEAR}–${MAX_YEAR})`; return; }
+    if(!traveling){ state.year=y; renderConsole(); beep(); } }
+  else if(k==="P"){ Engine.pressure=Math.max(0,Math.min(100,parseInt(v,10)||0)); updateEngineBadge(); }
+  else if(k==="L"){ engineLaunch(parseInt(v,10)); }
+  else if(k==="F"){ fizzle(); }
+  else if(k==="A"){ if(traveling) warpAbort=true; else sputter(0.5); }
+  else if(k==="V"){ steamHiss(); }
+  else if(k==="S"){ Engine.lever=parseInt(v,10); if(Engine.lever===2) secretStyle=SECRET_STYLES[Math.floor(Math.random()*SECRET_STYLES.length)]; }
+}
+function engineLaunch(y){
+  if(isNaN(y)) y=Engine.year;
+  if(traveling || anyModalOpen()){ Engine.send("N"); return; }
+  if(isNaN(y) || y<MIN_YEAR || y>MAX_YEAR){ Engine.send("N"); toast(`The drums show ${y}. Set a year from ${MIN_YEAR} to ${MAX_YEAR}.`); sputter(0.8); return; }
+  if($("#lightbox").classList.contains("on")) $("#lightbox button").click();
+  if($("#viewer").classList.contains("on")) closeViewer();
+  if($("#today").classList.contains("on")) $("#tdClose").click();
+  state.year=y; renderConsole(); travel(y);
+}
+function fizzle(){
+  sputter(1.1);
+  toast("Not enough power! Crank the handle until the gauge is full.");
+  if(state.sound) setTimeout(()=>runQueue([{tts:"Warning. Insufficient power. Crank the generator."}]),900);
+}
+// sputtering engine: low thumps and crackle
+function sputter(secs){
+  if(!state.sound) return; const a=ac(); if(!a) return; const t=a.currentTime;
+  for(let i=0;i<Math.round(secs*7);i++){ const at=t+i*0.14+Math.random()*0.05;
+    const o=a.createOscillator(), g=a.createGain(); o.type="sawtooth"; o.frequency.setValueAtTime(70+Math.random()*40,at); o.frequency.exponentialRampToValueAtTime(35,at+0.1);
+    g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(0.3,at+0.01); g.gain.exponentialRampToValueAtTime(0.0001,at+0.12);
+    const f=a.createBiquadFilter(); f.type="lowpass"; f.frequency.value=600; o.connect(f).connect(g).connect(a.destination); o.start(at); o.stop(at+0.14);
+    const n=a.createBufferSource(); n.buffer=noiseBuf(a,0.1); const ng=a.createGain(); ng.gain.setValueAtTime(0.12,at); ng.gain.exponentialRampToValueAtTime(0.0001,at+0.08);
+    n.connect(biq(a,"bandpass",1800,1)).connect(ng).connect(a.destination); n.start(at); }
+}
+// steam venting from the valve wheel
+function steamHiss(){
+  if(!state.sound) return; const a=ac(); if(!a) return; const t=a.currentTime;
+  const n=a.createBufferSource(); n.buffer=noiseBuf(a,1.6); const f=a.createBiquadFilter(); f.type="highpass";
+  f.frequency.setValueAtTime(2500,t); f.frequency.linearRampToValueAtTime(5000,t+1.4);
+  const g=a.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.35,t+0.06); g.gain.exponentialRampToValueAtTime(0.0001,t+1.5);
+  n.connect(f).connect(g).connect(a.destination); n.start(t); n.stop(t+1.6);
+}
+$("#sEngineOn").onchange=e=>{ store.setKV("engineOn",e.target.checked); engineEnabled(e.target.checked); };
+
 /* ---------- grown-up PIN lock ---------- */
 let unlocked=false, lockTimer=null, pinEntry="", pinFails=0, pinBlockedUntil=0, pinThen=null;
 async function hashPin(pin){
@@ -1921,7 +2466,7 @@ openSettings=(...a)=>requirePin(()=>_openSettings(...a));
 $("#setBtn").onclick=()=>openSettings();
 
 /* ---------- boot ---------- */
-function renderAll(){ renderTitle(); renderConsole(); renderArrival(); }
+function renderAll(){ applyTheme(state.config.theme||"brick"); renderTitle(); renderConsole(); renderArrival(); }
 $("#fab").onclick=()=>openMemForm(null, state.arrivedYear ? `${state.arrivedYear}-06-01` : null);
 renderAll();
 (async function init(){
@@ -1932,9 +2477,11 @@ renderAll();
     const s=await store.getKV("sound"); if(typeof s==="boolean"){ state.sound=s; $("#soundBtn").textContent=s?"🔊":"🔇"; }
     const mu=await store.getKV("music"); if(typeof mu==="boolean") state.music=mu; musicSync();
     state.memories=(await store.allMemories()).filter(m=>m && /^\d{4}-\d\d-\d\d$/.test(m.date||""));
+    const fp=await store.getKV("factPhotos"); if(fp && typeof fp==="object") state.factPhotos=fp;
   }catch(e){ $("#status").textContent="⚠ Couldn't open saved memories."; }
   try{ if(navigator.storage&&navigator.storage.persist) await navigator.storage.persist(); }catch(e){}
   renderAll(); applyLock(); updateBackupInfo(); setTimeout(autoBackupCheck,6000);
+  if(IS_APP){ const eo=await store.getKV("engineOn"); $("#sEngineOn").checked=!!eo; if(eo) engineEnabled(true); }
 })();
 })();
 </script>

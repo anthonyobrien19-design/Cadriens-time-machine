@@ -3,6 +3,24 @@ package com.family.timemachine;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.ParcelUuid;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +56,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,15 +66,34 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * The Time Machine app: shows the time machine page (bundled inside the app) full screen
  * and adds the things a web page can't do on its own: backups to a folder you choose,
  * restoring, the phone's real voices, file and microphone access, and the back button.
  * The app has no internet permission, so it cannot go online.
+ * It can also link to the Temporal Engine (the brass ESP32 console) over Bluetooth Low Energy.
  */
+@SuppressLint("MissingPermission")   // Bluetooth permissions are checked at run time in engineBegin()
 public class MainActivity extends Activity {
-    private static final int REQ_FILES = 1, REQ_FOLDER = 2, REQ_RESTORE = 3, REQ_MIC = 4;
+    private static final int REQ_FILES = 1, REQ_FOLDER = 2, REQ_RESTORE = 3, REQ_MIC = 4, REQ_BT = 5;
+
+    // Nordic UART Service, as used by the engine's ESP32 firmware
+    private static final UUID NUS = UUID.fromString("6e400001-b5a3-f393-e0a9-e50e24dcca9e");
+    private static final UUID NUS_RX = UUID.fromString("6e400002-b5a3-f393-e0a9-e50e24dcca9e"); // phone -> engine
+    private static final UUID NUS_TX = UUID.fromString("6e400003-b5a3-f393-e0a9-e50e24dcca9e"); // engine -> phone
+    private static final UUID CCCD = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
+
+    private final Handler ui = new Handler(Looper.getMainLooper());
+    private BluetoothAdapter btAdapter;
+    private BluetoothLeScanner scanner;
+    private BluetoothGatt gatt;
+    private BluetoothGattCharacteristic rxChar;
+    private volatile boolean engineWanted = false, scanning = false, askedBtOn = false;
+    private final StringBuilder engineBuf = new StringBuilder();
+    private final ArrayDeque<byte[]> writeQueue = new ArrayDeque<>();
+    private boolean writing = false;
 
     private WebView web;
     private SharedPreferences prefs;
@@ -222,6 +261,11 @@ public class MainActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+        if (requestCode == REQ_BT) {
+            if (hasBlePerms()) engineBegin();
+            else engineState("noperm");
+            return;
+        }
         if (requestCode == REQ_MIC && pendingMic != null) {
             if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED)
                 pendingMic.grant(new String[]{PermissionRequest.RESOURCE_AUDIO_CAPTURE});
@@ -253,6 +297,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        engineEnd();
         if (tts != null) tts.shutdown();
         if (web != null) web.destroy();
         super.onDestroy();
@@ -333,6 +378,156 @@ public class MainActivity extends Activity {
             if (f != null) //noinspection ResultOfMethodCallIgnored
                 f.delete();
             send(msg("tts").put2("id", id).put2("error", "synth"));
+        }
+    }
+
+    // ---------------- Temporal Engine link (Bluetooth Low Energy) ----------------
+
+    private void engineState(String state) { send(msg("engineState").put2("state", state)); }
+
+    private String[] blePerms() {
+        if (Build.VERSION.SDK_INT >= 31)
+            return new String[]{Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT};
+        return new String[]{Manifest.permission.ACCESS_FINE_LOCATION};   // Android 11 and older need this to scan
+    }
+
+    private boolean hasBlePerms() {
+        for (String p : blePerms()) if (checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED) return false;
+        return true;
+    }
+
+    private void engineBeginLater(long ms) { ui.postDelayed(() -> { if (engineWanted && gatt == null && !scanning) engineBegin(); }, ms); }
+
+    private void engineBegin() {
+        engineWanted = true;
+        if (!hasBlePerms()) { engineState("asking"); requestPermissions(blePerms(), REQ_BT); return; }
+        BluetoothManager bm = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+        btAdapter = bm == null ? null : bm.getAdapter();
+        if (btAdapter == null) { engineState("nobluetooth"); return; }
+        if (!btAdapter.isEnabled()) {
+            engineState("btoff");
+            if (!askedBtOn) {
+                askedBtOn = true;
+                try { startActivity(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)); } catch (Exception ignored) { }
+            }
+            engineBeginLater(4000);
+            return;
+        }
+        if (gatt != null || scanning) return;
+        scanner = btAdapter.getBluetoothLeScanner();
+        if (scanner == null) { engineBeginLater(3000); return; }
+        List<ScanFilter> filters = Collections.singletonList(new ScanFilter.Builder().setServiceUuid(new ParcelUuid(NUS)).build());
+        ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
+        scanning = true;
+        engineState("searching");
+        try { scanner.startScan(filters, settings, scanCallback); }
+        catch (Exception e) { scanning = false; engineBeginLater(5000); return; }
+        ui.postDelayed(() -> {                       // scan in 15-second rounds to save battery
+            if (scanning) { stopScan(); engineBeginLater(5000); }
+        }, 15000);
+    }
+
+    private void stopScan() {
+        if (!scanning) return;
+        scanning = false;
+        try { if (scanner != null) scanner.stopScan(scanCallback); } catch (Exception ignored) { }
+    }
+
+    private void engineEnd() {
+        engineWanted = false;
+        stopScan();
+        if (gatt != null) { try { gatt.disconnect(); gatt.close(); } catch (Exception ignored) { } }
+        gatt = null; rxChar = null;
+        synchronized (writeQueue) { writeQueue.clear(); writing = false; }
+        engineState("off");
+    }
+
+    private final ScanCallback scanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            if (!scanning) return;
+            stopScan();
+            engineState("connecting");
+            BluetoothDevice device = result.getDevice();
+            gatt = device.connectGatt(MainActivity.this, false, gattCallback, BluetoothDevice.TRANSPORT_LE);
+        }
+
+        @Override
+        public void onScanFailed(int errorCode) { scanning = false; engineBeginLater(5000); }
+    };
+
+    private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+        @Override
+        public void onConnectionStateChange(BluetoothGatt g, int status, int newState) {
+            if (newState == BluetoothProfile.STATE_CONNECTED) {
+                if (!g.requestMtu(185)) g.discoverServices();
+            } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                try { g.close(); } catch (Exception ignored) { }
+                if (g == gatt) { gatt = null; rxChar = null; }
+                synchronized (writeQueue) { writeQueue.clear(); writing = false; }
+                if (engineWanted) { engineState("searching"); engineBeginLater(2000); }
+            }
+        }
+
+        @Override
+        public void onMtuChanged(BluetoothGatt g, int mtu, int status) { g.discoverServices(); }
+
+        @Override
+        public void onServicesDiscovered(BluetoothGatt g, int status) {
+            BluetoothGattService svc = g.getService(NUS);
+            if (svc == null) { g.disconnect(); return; }
+            rxChar = svc.getCharacteristic(NUS_RX);
+            BluetoothGattCharacteristic tx = svc.getCharacteristic(NUS_TX);
+            if (rxChar == null || tx == null) { g.disconnect(); return; }
+            g.setCharacteristicNotification(tx, true);
+            BluetoothGattDescriptor d = tx.getDescriptor(CCCD);
+            if (d != null) {
+                d.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                g.writeDescriptor(d);
+            } else {
+                engineState("connected");
+            }
+        }
+
+        @Override
+        public void onDescriptorWrite(BluetoothGatt g, BluetoothGattDescriptor d, int status) { engineState("connected"); }
+
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt g, BluetoothGattCharacteristic c) {
+            byte[] v = c.getValue();
+            if (v == null) return;
+            synchronized (engineBuf) {
+                engineBuf.append(new String(v, StandardCharsets.UTF_8));
+                int nl;
+                while ((nl = engineBuf.indexOf("\n")) >= 0) {
+                    String line = engineBuf.substring(0, nl).trim();
+                    engineBuf.delete(0, nl + 1);
+                    if (!line.isEmpty()) send(msg("engine").put2("line", line));
+                }
+                if (engineBuf.length() > 512) engineBuf.setLength(0);
+            }
+        }
+
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt g, BluetoothGattCharacteristic c, int status) {
+            synchronized (writeQueue) { writing = false; }
+            pumpWrites();
+        }
+    };
+
+    private void pumpWrites() {
+        byte[] next;
+        synchronized (writeQueue) {
+            if (writing || gatt == null || rxChar == null || writeQueue.isEmpty()) return;
+            next = writeQueue.poll();
+            writing = true;
+        }
+        try {
+            rxChar.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
+            rxChar.setValue(next);
+            if (!gatt.writeCharacteristic(rxChar)) { synchronized (writeQueue) { writing = false; } ui.postDelayed(this::pumpWrites, 50); }
+        } catch (Exception e) {
+            synchronized (writeQueue) { writing = false; }
         }
     }
 
@@ -470,6 +665,24 @@ public class MainActivity extends Activity {
                     return null;
                 }
             }
+        }
+
+        // ----- the Temporal Engine -----
+        @JavascriptInterface
+        public void engineStart() { runOnUiThread(MainActivity.this::engineBegin); }
+
+        @JavascriptInterface
+        public void engineStop() { runOnUiThread(MainActivity.this::engineEnd); }
+
+        @JavascriptInterface
+        public boolean engineSend(String line) {
+            if (gatt == null || rxChar == null) return false;
+            synchronized (writeQueue) {
+                if (writeQueue.size() > 20) writeQueue.poll();
+                writeQueue.add((line + "\n").getBytes(StandardCharsets.UTF_8));
+            }
+            pumpWrites();
+            return true;
         }
 
         // ----- the phone's voices -----
